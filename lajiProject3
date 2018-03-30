@@ -1,0 +1,1144 @@
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.FlowLayout;
+import java.awt.Graphics;
+import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JRadioButton;
+import javax.swing.JSlider;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
+
+public class Fireworks extends JFrame implements ActionListener, ItemListener, ChangeListener {
+
+	protected JSlider speedSlider1, speedSlider2;
+	protected JSlider angleSlider1, angleSlider2;
+	protected JSlider timeSlider1, timeSlider2;
+	protected JSlider secondexplosionSlider1, secondexplosionSlider2;
+	protected JSlider timesecondexplosionSlider1, timesecondexplosionSlider2;
+
+	protected int speed1 = 90, speed2 = 90;
+	protected double angle1 = Math.toRadians(60), angle2 = Math.toRadians(60);
+	protected int time1 = 5, time2 = 5;
+	protected int secondexplosionTime1 = 5, secondexplosionTime2 = 5;
+	protected int secondexplosionNumber1 = 2, secondexplosionNumber2 = 2;
+
+	protected Color color1, color2;
+
+	protected JRadioButton red1, red2;
+	protected JRadioButton blue1, blue2;
+	protected JRadioButton yellow1, yellow2;
+	protected JRadioButton green1, green2;
+	protected JRadioButton orange1, orange2;
+
+	protected JRadioButton explosion1of1, explosion1of2;
+	protected JRadioButton explosion2of1, explosion2of2;
+	protected JRadioButton explosion3of1, explosion3of2;
+	protected JRadioButton explosion4of1, explosion4of2;
+	protected JRadioButton explosion5of1, explosion5of2;
+
+	protected JLabel speedLabel1, speedLabel2;
+	protected JLabel angleLabel1, angleLabel2;
+	protected JLabel timeLabel1, timeLabel2;
+	protected JLabel colorLabel1, colorLabel2;
+	protected JLabel explosionLabel1, explosionLabel2;
+	protected JLabel secondexlabelNumber1, secondexlabelNumber2;
+	protected JLabel secondexlabelTime1, secondexlabelTime2;
+	protected JLabel firstLabel1, firstLabel2;
+	protected JLabel secondLabel1, secondLabel2;
+
+	protected JButton start;
+	protected JButton newProjectile;
+	protected JButton deleteProjectile;
+	protected int explosionNumber1, explosionNumber2;
+
+	protected JPanel leftPanel = new JPanel();
+	protected JPanel centerPanel = new JPanel();
+	protected JPanel rightPanel = new JPanel();
+	protected JPanel upperPanel = new JPanel();
+
+	public Fireworks() {
+
+		setTitle("Project3");
+		setSize(1000, 600);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setLayout(new BorderLayout());
+
+		add(leftPanel, BorderLayout.WEST);
+		add(centerPanel, BorderLayout.CENTER);
+		add(rightPanel, BorderLayout.EAST);
+		add(upperPanel, BorderLayout.NORTH);
+
+		leftPanel.setLayout(new GridLayout(14, 1));
+		rightPanel.setLayout(new GridLayout(14, 1));
+
+		JPanel firstPanel1 = new JPanel(new FlowLayout(FlowLayout.CENTER));
+		firstLabel1 = new JLabel("First explosion");
+		;
+		firstPanel1.add(firstLabel1);
+		leftPanel.add(firstPanel1);
+
+		JPanel speedPanel1 = new JPanel(new FlowLayout(FlowLayout.LEFT));
+		speedLabel1 = new JLabel(" Speed: 90");
+		speedSlider1 = new JSlider(50, 130);
+		speedSlider1.addChangeListener(this);
+		speedPanel1.add(speedLabel1);
+		speedPanel1.add(speedSlider1);
+		leftPanel.add(speedPanel1);
+
+		JPanel anglePanel1 = new JPanel(new FlowLayout(FlowLayout.LEFT));
+		angleLabel1 = new JLabel(" Angle: 60");
+		angleSlider1 = new JSlider(30, 90);
+		angleSlider1.addChangeListener(this);
+		anglePanel1.add(angleLabel1);
+		anglePanel1.add(angleSlider1);
+		leftPanel.add(anglePanel1);
+
+		JPanel timePanel1 = new JPanel(new FlowLayout(FlowLayout.LEFT));
+		timeLabel1 = new JLabel("    Time: 5");
+		timeSlider1 = new JSlider(0, 10);
+		timeSlider1.addChangeListener(this);
+		timePanel1.add(timeLabel1);
+		timePanel1.add(timeSlider1);
+		leftPanel.add(timePanel1);
+
+		JPanel secondPanel1 = new JPanel(new FlowLayout(FlowLayout.CENTER));
+		secondLabel1 = new JLabel("Second explosion");
+		secondPanel1.add(secondLabel1);
+		leftPanel.add(secondPanel1);
+
+		JPanel secondexplosionPanel1 = new JPanel(new FlowLayout(FlowLayout.LEFT));
+		secondexlabelNumber1 = new JLabel("Number: 2");
+		secondexplosionSlider1 = new JSlider(1, 3);
+		secondexplosionSlider1.addChangeListener(this);
+		secondexplosionPanel1.add(secondexlabelNumber1);
+		secondexplosionPanel1.add(secondexplosionSlider1);
+		leftPanel.add(secondexplosionPanel1);
+
+		JPanel secondtimePanel1 = new JPanel(new FlowLayout(FlowLayout.LEFT));
+		secondexlabelTime1 = new JLabel("    Time: 5");
+		timesecondexplosionSlider1 = new JSlider(0, 10);
+		timesecondexplosionSlider1.addChangeListener(this);
+		secondtimePanel1.add(secondexlabelTime1);
+		secondtimePanel1.add(timesecondexplosionSlider1);
+		leftPanel.add(secondtimePanel1);
+
+		JPanel colorPanel1of1 = new JPanel(new FlowLayout(FlowLayout.LEFT));
+		JPanel colorPanel2of1 = new JPanel(new FlowLayout(FlowLayout.LEFT));
+		red1 = new JRadioButton("Red");
+		red1.addActionListener(this);
+		blue1 = new JRadioButton("Blue");
+		blue1.addActionListener(this);
+		yellow1 = new JRadioButton("Yellow");
+		yellow1.addActionListener(this);
+		green1 = new JRadioButton("Green");
+		green1.addActionListener(this);
+		orange1 = new JRadioButton("Orange");
+		orange1.addActionListener(this);
+		colorLabel1 = new JLabel("Color: ");
+		colorPanel1of1.add(colorLabel1);
+		colorPanel1of1.add(red1);
+		colorPanel1of1.add(blue1);
+		colorPanel2of1.add(yellow1);
+		colorPanel2of1.add(green1);
+		colorPanel2of1.add(orange1);
+		leftPanel.add(colorPanel1of1);
+		leftPanel.add(colorPanel2of1);
+
+		JPanel explosionPanel1of1 = new JPanel(new FlowLayout(FlowLayout.LEFT));
+		JPanel explosionPanel2of1 = new JPanel(new FlowLayout(FlowLayout.LEFT));
+		JPanel explosionPanel3of1 = new JPanel(new FlowLayout(FlowLayout.LEFT));
+		explosion1of1 = new JRadioButton("Triple circle");
+		explosion1of1.addActionListener(this);
+		explosion2of1 = new JRadioButton("Square circle");
+		explosion2of1.addActionListener(this);
+		explosion3of1 = new JRadioButton("Triangle circle");
+		explosion3of1.addActionListener(this);
+		explosion4of1 = new JRadioButton("Hexagon");
+		explosion4of1.addActionListener(this);
+		explosion5of1 = new JRadioButton("Sun");
+		explosion5of1.addActionListener(this);
+		explosionLabel1 = new JLabel("Explosion type:  ");
+		explosionPanel1of1.add(explosionLabel1);
+		explosionPanel1of1.add(explosion1of1);
+		explosionPanel2of1.add(explosion2of1);
+		explosionPanel2of1.add(explosion3of1);
+		explosionPanel3of1.add(explosion4of1);
+		explosionPanel3of1.add(explosion5of1);
+		leftPanel.add(explosionPanel1of1);
+		leftPanel.add(explosionPanel2of1);
+		leftPanel.add(explosionPanel3of1);
+
+		JPanel firstPanel2 = new JPanel(new FlowLayout(FlowLayout.CENTER));
+		firstLabel2 = new JLabel("First explosion");
+		;
+		firstPanel2.add(firstLabel2);
+		rightPanel.add(firstPanel2);
+
+		JPanel speedPanel2 = new JPanel(new FlowLayout(FlowLayout.LEFT));
+		speedLabel2 = new JLabel("Speed: 90");
+		speedSlider2 = new JSlider(50, 130);
+		speedSlider2.addChangeListener(this);
+		speedPanel2.add(speedLabel2);
+		speedPanel2.add(speedSlider2);
+		rightPanel.add(speedPanel2);
+
+		JPanel anglePanel2 = new JPanel(new FlowLayout(FlowLayout.LEFT));
+		angleLabel2 = new JLabel("Angle: 60");
+		angleSlider2 = new JSlider(30, 90);
+		angleSlider2.addChangeListener(this);
+		anglePanel2.add(angleLabel2);
+		anglePanel2.add(angleSlider2);
+		rightPanel.add(anglePanel2);
+
+		JPanel timePanel2 = new JPanel(new FlowLayout(FlowLayout.LEFT));
+		timeLabel2 = new JLabel("   Time: 5");
+		timeSlider2 = new JSlider(0, 10);
+		timeSlider2.addChangeListener(this);
+		timePanel2.add(timeLabel2);
+		timePanel2.add(timeSlider2);
+		rightPanel.add(timePanel2);
+
+		JPanel secondPanel2 = new JPanel(new FlowLayout(FlowLayout.CENTER));
+		secondLabel2 = new JLabel("Second explosion");
+		secondPanel2.add(secondLabel2);
+		rightPanel.add(secondPanel2);
+
+		JPanel secondexplosionPanel2 = new JPanel(new FlowLayout(FlowLayout.LEFT));
+		secondexlabelNumber2 = new JLabel("Number: 2");
+		secondexplosionSlider2 = new JSlider(1, 3);
+		secondexplosionSlider2.addChangeListener(this);
+		secondexplosionPanel2.add(secondexlabelNumber2);
+		secondexplosionPanel2.add(secondexplosionSlider2);
+		rightPanel.add(secondexplosionPanel2);
+
+		JPanel secondtimePanel2 = new JPanel(new FlowLayout(FlowLayout.LEFT));
+		secondexlabelTime2 = new JLabel("    Time: 5");
+		timesecondexplosionSlider2 = new JSlider(0, 10);
+		timesecondexplosionSlider2.addChangeListener(this);
+		secondtimePanel2.add(secondexlabelTime2);
+		secondtimePanel2.add(timesecondexplosionSlider2);
+		rightPanel.add(secondtimePanel2);
+
+		JPanel colorPanel1of2 = new JPanel(new FlowLayout(FlowLayout.LEFT));
+		JPanel colorPanel2of2 = new JPanel(new FlowLayout(FlowLayout.LEFT));
+		red2 = new JRadioButton("Red");
+		red2.addActionListener(this);
+		blue2 = new JRadioButton("Blue");
+		blue2.addActionListener(this);
+		yellow2 = new JRadioButton("Yellow");
+		yellow2.addActionListener(this);
+		green2 = new JRadioButton("Green");
+		green2.addActionListener(this);
+		orange2 = new JRadioButton("Orange");
+		orange2.addActionListener(this);
+		colorLabel2 = new JLabel("Color: ");
+		colorPanel1of2.add(colorLabel2);
+		colorPanel1of2.add(red2);
+		colorPanel1of2.add(blue2);
+		colorPanel2of2.add(yellow2);
+		colorPanel2of2.add(green2);
+		colorPanel2of2.add(orange2);
+		rightPanel.add(colorPanel1of2);
+		rightPanel.add(colorPanel2of2);
+
+		JPanel explosionPanel1of2 = new JPanel(new FlowLayout(FlowLayout.LEFT));
+		JPanel explosionPanel2of2 = new JPanel(new FlowLayout(FlowLayout.LEFT));
+		JPanel explosionPanel3of2 = new JPanel(new FlowLayout(FlowLayout.LEFT));
+		explosion1of2 = new JRadioButton("Triple circle");
+		explosion1of2.addActionListener(this);
+		explosion2of2 = new JRadioButton("Square circle");
+		explosion2of2.addActionListener(this);
+		explosion3of2 = new JRadioButton("Triangle circle");
+		explosion3of2.addActionListener(this);
+		explosion4of2 = new JRadioButton("Hexagon");
+		explosion4of2.addActionListener(this);
+		explosion5of2 = new JRadioButton("Sun");
+		explosion5of2.addActionListener(this);
+		explosionLabel2 = new JLabel("Explosion type:  ");
+		explosionPanel1of2.add(explosionLabel2);
+		explosionPanel1of2.add(explosion1of2);
+		explosionPanel2of2.add(explosion2of2);
+		explosionPanel2of2.add(explosion3of2);
+		explosionPanel3of2.add(explosion4of2);
+		explosionPanel3of2.add(explosion5of2);
+		rightPanel.add(explosionPanel1of2);
+		rightPanel.add(explosionPanel2of2);
+		rightPanel.add(explosionPanel3of2);
+
+		rightPanel.setVisible(false);
+
+		JPanel startPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
+		start = new JButton("Start launching");
+		start.addActionListener(this);
+		startPanel.add(start);
+		newProjectile = new JButton("Add a new projectile");
+		newProjectile.addActionListener(this);
+		startPanel.add(newProjectile);
+		deleteProjectile = new JButton("Delete the new projectile");
+		deleteProjectile.addActionListener(this);
+		startPanel.add(deleteProjectile);
+		upperPanel.add(startPanel);
+
+	}
+
+	@Override
+	public void stateChanged(ChangeEvent e) {
+		if (e.getSource() == speedSlider1) {
+			speed1 = speedSlider1.getValue();
+			speedLabel1.setText("Speed: " + Integer.toString(speedSlider1.getValue()));
+		}
+		if (e.getSource() == angleSlider1) {
+			angle1 = Math.toRadians(angleSlider1.getValue());
+			angleLabel1.setText("Angle: " + Integer.toString(angleSlider1.getValue()));
+		}
+		if (e.getSource() == timeSlider1) {
+			time1 = timeSlider1.getValue();
+			timeLabel1.setText("   Time: " + Integer.toString(timeSlider1.getValue()));
+		}
+		if (e.getSource() == secondexplosionSlider1) {
+			secondexplosionNumber1 = secondexplosionSlider1.getValue();
+			secondexlabelNumber1.setText("Number: " + Integer.toString(secondexplosionSlider1.getValue()));
+		}
+		if (e.getSource() == timesecondexplosionSlider1) {
+			secondexplosionTime1 = timesecondexplosionSlider1.getValue();
+			secondexlabelTime1.setText("    Time: " + Integer.toString(timesecondexplosionSlider1.getValue()));
+		}
+		if (e.getSource() == speedSlider2) {
+			speed2 = speedSlider2.getValue();
+			speedLabel2.setText("Speed: " + Integer.toString(speedSlider2.getValue()));
+		}
+		if (e.getSource() == angleSlider2) {
+			angle2 = Math.toRadians(angleSlider2.getValue());
+			angleLabel2.setText("Angle: " + Integer.toString(angleSlider2.getValue()));
+		}
+		if (e.getSource() == timeSlider2) {
+			time2 = timeSlider2.getValue();
+			timeLabel2.setText("   Time: " + Integer.toString(timeSlider2.getValue()));
+		}
+		if (e.getSource() == secondexplosionSlider2) {
+			secondexplosionNumber2 = secondexplosionSlider2.getValue();
+			secondexlabelNumber2.setText("Number: " + Integer.toString(secondexplosionSlider2.getValue()));
+		}
+		if (e.getSource() == timesecondexplosionSlider2) {
+			secondexplosionTime2 = timesecondexplosionSlider2.getValue();
+			secondexlabelTime2.setText("    Time: " + Integer.toString(timesecondexplosionSlider2.getValue()));
+		}
+
+	}
+
+	@Override
+	public void itemStateChanged(ItemEvent e) {
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		if (e.getSource() == red1) {
+			color1 = Color.RED;
+			blue1.setSelected(false);
+			yellow1.setSelected(false);
+			green1.setSelected(false);
+			orange1.setSelected(false);
+		}
+		if (e.getSource() == blue1) {
+			color1 = Color.BLUE;
+			red1.setSelected(false);
+			yellow1.setSelected(false);
+			green1.setSelected(false);
+			orange1.setSelected(false);
+		}
+		if (e.getSource() == yellow1) {
+			color1 = Color.YELLOW;
+			red1.setSelected(false);
+			blue1.setSelected(false);
+			green1.setSelected(false);
+			orange1.setSelected(false);
+		}
+		if (e.getSource() == green1) {
+			color1 = Color.GREEN;
+			red1.setSelected(false);
+			blue1.setSelected(false);
+			yellow1.setSelected(false);
+			orange1.setSelected(false);
+		}
+		if (e.getSource() == orange1) {
+			color1 = Color.ORANGE;
+			red1.setSelected(false);
+			blue1.setSelected(false);
+			yellow1.setSelected(false);
+			green1.setSelected(false);
+		}
+		if (e.getSource() == explosion1of1) {
+			explosionNumber1 = 1;
+			explosion2of1.setSelected(false);
+			explosion3of1.setSelected(false);
+			explosion4of1.setSelected(false);
+			explosion5of1.setSelected(false);
+		}
+		if (e.getSource() == explosion2of1) {
+			explosionNumber1 = 2;
+			explosion1of1.setSelected(false);
+			explosion3of1.setSelected(false);
+			explosion4of1.setSelected(false);
+			explosion5of1.setSelected(false);
+		}
+		if (e.getSource() == explosion3of1) {
+			explosionNumber1 = 3;
+			explosion1of1.setSelected(false);
+			explosion2of1.setSelected(false);
+			explosion4of1.setSelected(false);
+			explosion5of1.setSelected(false);
+		}
+		if (e.getSource() == explosion4of1) {
+			explosionNumber1 = 4;
+			explosion1of1.setSelected(false);
+			explosion2of1.setSelected(false);
+			explosion3of1.setSelected(false);
+			explosion5of1.setSelected(false);
+		}
+		if (e.getSource() == explosion5of1) {
+			explosionNumber1 = 5;
+			explosion1of1.setSelected(false);
+			explosion2of1.setSelected(false);
+			explosion3of1.setSelected(false);
+			explosion4of1.setSelected(false);
+		}
+
+		if (e.getSource() == red2) {
+			color2 = Color.RED;
+			blue2.setSelected(false);
+			yellow2.setSelected(false);
+			green2.setSelected(false);
+			orange2.setSelected(false);
+		}
+		if (e.getSource() == blue2) {
+			color2 = Color.BLUE;
+			red2.setSelected(false);
+			yellow2.setSelected(false);
+			green2.setSelected(false);
+			orange2.setSelected(false);
+		}
+		if (e.getSource() == yellow2) {
+			color2 = Color.YELLOW;
+			red2.setSelected(false);
+			blue2.setSelected(false);
+			green2.setSelected(false);
+			orange2.setSelected(false);
+		}
+		if (e.getSource() == green2) {
+			color2 = Color.GREEN;
+			red2.setSelected(false);
+			blue2.setSelected(false);
+			yellow2.setSelected(false);
+			orange2.setSelected(false);
+		}
+		if (e.getSource() == orange2) {
+			color2 = Color.ORANGE;
+			red2.setSelected(false);
+			blue2.setSelected(false);
+			yellow2.setSelected(false);
+			green2.setSelected(false);
+		}
+		if (e.getSource() == explosion1of2) {
+			explosionNumber2 = 1;
+			explosion2of2.setSelected(false);
+			explosion3of2.setSelected(false);
+			explosion4of2.setSelected(false);
+			explosion5of2.setSelected(false);
+		}
+		if (e.getSource() == explosion2of2) {
+			explosionNumber2 = 2;
+			explosion1of2.setSelected(false);
+			explosion3of2.setSelected(false);
+			explosion4of2.setSelected(false);
+			explosion5of2.setSelected(false);
+		}
+		if (e.getSource() == explosion3of2) {
+			explosionNumber2 = 3;
+			explosion1of2.setSelected(false);
+			explosion2of2.setSelected(false);
+			explosion4of2.setSelected(false);
+			explosion5of2.setSelected(false);
+		}
+		if (e.getSource() == explosion4of2) {
+			explosionNumber2 = 4;
+			explosion1of2.setSelected(false);
+			explosion2of2.setSelected(false);
+			explosion3of2.setSelected(false);
+			explosion5of2.setSelected(false);
+		}
+		if (e.getSource() == explosion5of2) {
+			explosionNumber2 = 5;
+			explosion1of2.setSelected(false);
+			explosion2of2.setSelected(false);
+			explosion3of2.setSelected(false);
+			explosion4of2.setSelected(false);
+		}
+
+		Graphics g = centerPanel.getGraphics();
+		int b = this.getHeight();
+		double x = speed1 * Math.cos(angle1) * time1;
+		double y = b - (speed1 * Math.sin(angle1) * time1 - 0.5 * 9.8 * time1 * time1);
+		double x1, y1;
+		double xx = speed2 * Math.cos(angle2) * time2;
+		double yy = b - (speed2 * Math.sin(angle2) * time2 - 0.5 * 9.8 * time2 * time2);
+		double xx1, yy1;
+		if (e.getSource() == start) {
+			centerPanel.paint(g);
+			switch (explosionNumber1) {
+
+			case 1:
+				g.setColor(color1);
+				g.drawArc(0, (int) y, (int) (2 * x), (int) (4 * y), (int) (90 - angle1), 90);
+				if (secondexplosionNumber1 == 1) {
+					for (int i = 20, j = 20; i <= 60 && j <= 60; i += 20, j += 20) {
+						g.drawOval((int) (x - i), (int) (y - j), i * 2, j * 2);
+					}
+				}
+				if (secondexplosionNumber1 == 2) {
+					x1 = 20 * Math.cos(2 * Math.PI / secondexplosionNumber1) * secondexplosionTime1;
+					y1 = (20 * Math.sin(2 * Math.PI / secondexplosionNumber1) * secondexplosionTime1
+							- 0.5 * 9.8 * secondexplosionTime1 * secondexplosionTime1);
+					for (int i = 20, j = 20; i <= 60 && j <= 60; i += 20, j += 20) {
+						g.drawOval((int) (x + x1 - i), (int) (y + y1 - j), i * 2, j * 2);
+					}
+					x1 = 20 * Math.cos(2 * 2 * Math.PI / secondexplosionNumber1) * secondexplosionTime1;
+					y1 = (20 * Math.sin(2 * 2 * Math.PI / secondexplosionNumber1) * secondexplosionTime1
+							- 0.5 * 9.8 * secondexplosionTime1 * secondexplosionTime1);
+					for (int i = 20, j = 20; i <= 60 && j <= 60; i += 20, j += 20) {
+						g.drawOval((int) (x + x1 - i), (int) (y + y1 - j), i * 2, j * 2);
+					}
+				}
+				if (secondexplosionNumber1 == 3) {
+					x1 = 20 * Math.cos(2 * Math.PI / secondexplosionNumber1) * secondexplosionTime1;
+					y1 = (20 * Math.sin(2 * Math.PI / secondexplosionNumber1) * secondexplosionTime1
+							- 0.5 * 9.8 * secondexplosionTime1 * secondexplosionTime1);
+					for (int i = 20, j = 20; i <= 60 && j <= 60; i += 20, j += 20) {
+						g.drawOval((int) (x + x1 - i), (int) (y + y1 - j), i * 2, j * 2);
+					}
+					x1 = 20 * Math.cos(2 * 2 * Math.PI / secondexplosionNumber1) * secondexplosionTime1;
+					y1 = (20 * Math.sin(2 * 2 * Math.PI / secondexplosionNumber1) * secondexplosionTime1
+							- 0.5 * 9.8 * secondexplosionTime1 * secondexplosionTime1);
+					for (int i = 20, j = 20; i <= 60 && j <= 60; i += 20, j += 20) {
+						g.drawOval((int) (x + x1 - i), (int) (y + y1 - j), i * 2, j * 2);
+					}
+					x1 = 20 * Math.cos(2 * 3 * Math.PI / secondexplosionNumber1) * secondexplosionTime1;
+					y1 = (20 * Math.sin(2 * 3 * Math.PI / secondexplosionNumber1) * secondexplosionTime1
+							- 0.5 * 9.8 * secondexplosionTime1 * secondexplosionTime1);
+					for (int i = 20, j = 20; i <= 60 && j <= 60; i += 20, j += 20) {
+						g.drawOval((int) (x + x1 - i), (int) (y + y1 - j), i * 2, j * 2);
+					}
+				}
+
+				break;
+			case 2:
+				g.setColor(color1);
+				g.drawArc(0, (int) y, (int) (2 * x), (int) (4 * y), (int) (90 - angle1), 90);
+
+				if (secondexplosionNumber1 == 1) {
+					g.drawOval((int) (x - 20), (int) (y - 20), 40, 40);
+					g.drawRect((int) (x - 40), (int) (y - 40), 80, 80);
+				}
+				if (secondexplosionNumber1 == 2) {
+					x1 = 20 * Math.cos(2 * Math.PI / secondexplosionNumber1) * secondexplosionTime1;
+					y1 = (20 * Math.sin(2 * Math.PI / secondexplosionNumber1) * secondexplosionTime1
+							- 0.5 * 9.8 * secondexplosionTime1 * secondexplosionTime1);
+					g.drawOval((int) (x + x1 - 20), (int) (y + y1 - 20), 40, 40);
+					g.drawRect((int) (x + x1 - 40), (int) (y + y1 - 40), 80, 80);
+					x1 = 20 * Math.cos(2 * 2 * Math.PI / secondexplosionNumber1) * secondexplosionTime1;
+					y1 = (20 * Math.sin(2 * 2 * Math.PI / secondexplosionNumber1) * secondexplosionTime1
+							- 0.5 * 9.8 * secondexplosionTime1 * secondexplosionTime1);
+					g.drawOval((int) (x + x1 - 20), (int) (y + y1 - 20), 40, 40);
+					g.drawRect((int) (x + x1 - 40), (int) (y + y1 - 40), 80, 80);
+				}
+				if (secondexplosionNumber1 == 3) {
+					x1 = 20 * Math.cos(2 * Math.PI / secondexplosionNumber1) * secondexplosionTime1;
+					y1 = (20 * Math.sin(2 * Math.PI / secondexplosionNumber1) * secondexplosionTime1
+							- 0.5 * 9.8 * secondexplosionTime1 * secondexplosionTime1);
+					g.drawOval((int) (x + x1 - 20), (int) (y + y1 - 20), 40, 40);
+					g.drawRect((int) (x + x1 - 40), (int) (y + y1 - 40), 80, 80);
+					x1 = 20 * Math.cos(2 * 2 * Math.PI / secondexplosionNumber1) * secondexplosionTime1;
+					y1 = (20 * Math.sin(2 * 2 * Math.PI / secondexplosionNumber1) * secondexplosionTime1
+							- 0.5 * 9.8 * secondexplosionTime1 * secondexplosionTime1);
+					g.drawOval((int) (x + x1 - 20), (int) (y + y1 - 20), 40, 40);
+					g.drawRect((int) (x + x1 - 40), (int) (y + y1 - 40), 80, 80);
+					x1 = 20 * Math.cos(2 * 3 * Math.PI / secondexplosionNumber1) * secondexplosionTime1;
+					y1 = (20 * Math.sin(2 * 3 * Math.PI / secondexplosionNumber1) * secondexplosionTime1
+							- 0.5 * 9.8 * secondexplosionTime1 * secondexplosionTime1);
+					g.drawOval((int) (x + x1 - 20), (int) (y + y1 - 20), 40, 40);
+					g.drawRect((int) (x + x1 - 40), (int) (y + y1 - 40), 80, 80);
+				}
+
+				break;
+			case 3:
+				g.setColor(color1);
+				g.drawArc(0, (int) y, (int) (2 * x), (int) (4 * y), (int) (90 - angle1), 90);
+
+				if (secondexplosionNumber1 == 1) {
+					g.drawOval((int) (x - 50), (int) (y - 50), 100, 100);
+					g.drawLine((int) x, (int) (y - 20), (int) (x + 1.73205 * 10), (int) (y + 20));
+					g.drawLine((int) (x + 1.73205 * 10), (int) (y + 20), (int) (x - 1.73205 * 10), (int) (y + 20));
+					g.drawLine((int) (x - 1.73205 * 10), (int) (y + 20), (int) x, (int) (y - 20));
+				}
+				if (secondexplosionNumber1 == 2) {
+					x1 = 20 * Math.cos(2 * Math.PI / secondexplosionNumber1) * secondexplosionTime1;
+					y1 = (20 * Math.sin(2 * Math.PI / secondexplosionNumber1) * secondexplosionTime1
+							- 0.5 * 9.8 * secondexplosionTime1 * secondexplosionTime1);
+					g.drawOval((int) (x + x1 - 50), (int) (y + y1 - 50), 100, 100);
+					g.drawLine((int) (x + x1), (int) (y +y1- 20), (int) (x + x1 + 1.73205 * 10), (int) (y + y1 + 20));
+					g.drawLine((int) (x + x1 + 1.73205 * 10), (int) (y + y1 + 20), (int) (x + x1 - 1.73205 * 10),(int) (y + y1 + 20));
+					g.drawLine((int) (x + x1 - 1.73205 * 10), (int) (y + +y1 + 20), (int) (x + x1),(int) (y + y1 - 20));
+
+					x1 = 20 * Math.cos(2 * 2 * Math.PI / secondexplosionNumber1) * secondexplosionTime1;
+					y1 = (20 * Math.sin(2 * 2 * Math.PI / secondexplosionNumber1) * secondexplosionTime1
+							- 0.5 * 9.8 * secondexplosionTime1 * secondexplosionTime1);
+					g.drawOval((int) (x + x1 - 50), (int) (y + y1 - 50), 100, 100);
+					g.drawLine((int) (x + x1), (int) (y +y1- 20), (int) (x + x1 + 1.73205 * 10), (int) (y + y1 + 20));
+					g.drawLine((int) (x + x1 + 1.73205 * 10), (int) (y + y1 + 20), (int) (x + x1 - 1.73205 * 10),(int) (y + y1 + 20));
+					g.drawLine((int) (x + x1 - 1.73205 * 10), (int) (y + +y1 + 20), (int) (x + x1),(int) (y + y1 - 20));
+				}
+				if (secondexplosionNumber1 == 3) {
+					x1 = 20 * Math.cos(2 * Math.PI / secondexplosionNumber1) * secondexplosionTime1;
+					y1 = (20 * Math.sin(2 * Math.PI / secondexplosionNumber1) * secondexplosionTime1
+							- 0.5 * 9.8 * secondexplosionTime1 * secondexplosionTime1);
+					g.drawOval((int) (x + x1 - 50), (int) (y + y1 - 50), 100, 100);
+					g.drawLine((int) (x + x1), (int) (y +y1- 20), (int) (x + x1 + 1.73205 * 10), (int) (y + y1 + 20));
+					g.drawLine((int) (x + x1 + 1.73205 * 10), (int) (y + y1 + 20), (int) (x + x1 - 1.73205 * 10),(int) (y + y1 + 20));
+					g.drawLine((int) (x + x1 - 1.73205 * 10), (int) (y + +y1 + 20), (int) (x + x1),(int) (y + y1 - 20));
+
+					x1 = 20 * Math.cos(2 * 2 * Math.PI / secondexplosionNumber1) * secondexplosionTime1;
+					y1 = (20 * Math.sin(2 * 2 * Math.PI / secondexplosionNumber1) * secondexplosionTime1
+							- 0.5 * 9.8 * secondexplosionTime1 * secondexplosionTime1);
+					g.drawOval((int) (x + x1 - 50), (int) (y + y1 - 50), 100, 100);
+					g.drawLine((int) (x + x1), (int) (y - 20), (int) (x + x1 + 1.73205 * 10), (int) (y + y1 + 20));
+					g.drawLine((int) (x + x1 + 1.73205 * 10), (int) (y + y1 + 20), (int) (x + x1 - 1.73205 * 10),(int) (y + y1 + 20));
+					g.drawLine((int) (x + x1 - 1.73205 * 10), (int) (y + +y1 + 20), (int) (x + x1),(int) (y + y1 - 20));
+					x1 = 20 * Math.cos(2 * 3 * Math.PI / secondexplosionNumber1) * secondexplosionTime1;
+					y1 = (20 * Math.sin(2 * 3 * Math.PI / secondexplosionNumber1) * secondexplosionTime1
+							- 0.5 * 9.8 * secondexplosionTime1 * secondexplosionTime1);
+					g.drawOval((int) (x + x1 - 50), (int) (y + y1 - 50), 100, 100);
+					g.drawLine((int) (x + x1), (int) (y - 20), (int) (x + x1 + 1.73205 * 10), (int) (y + y1 + 20));
+					g.drawLine((int) (x + x1 + 1.73205 * 10), (int) (y + y1 + 20), (int) (x + x1 - 1.73205 * 10),
+							(int) (y + y1 + 20));
+					g.drawLine((int) (x + x1 - 1.73205 * 10), (int) (y + +y1 + 20), (int) (x + x1),
+							(int) (y + y1 - 20));
+				}
+
+				break;
+
+
+			case 4:
+				g.setColor(color1);
+				g.drawArc(0, (int) y, (int) (2 * x), (int) (4 * y), (int) (90 - angle1), 90);
+
+				if (secondexplosionNumber1 == 1) {
+					g.drawLine((int) (x), (int) (y - 30), (int) (1.73205 * 15 + x), (int) (y + 15));
+					g.drawLine((int) (x + 1.73205 * 15), (int) (y + 15), (int) (x - 1.73205 * 15), (int) (y + 15));
+					g.drawLine((int) (x - 1.73205 * 15), (int) (y + 15), (int) (x), (int) (y - 30));
+					g.drawLine((int) (x - 1.73205 * 15), (int) (y - 15), (int) (1.73205 * 15 + x), (int) (y - 15));
+					g.drawLine((int) (x + 1.73205 * 15), (int) (y - 15), (int) (x), (int) (y + 30));
+					g.drawLine((int) (x), (int) (y + 30), (int) (x - 1.73205 * 15), (int) (y - 15));
+				}
+				if (secondexplosionNumber1 == 2) {
+					x1 = 20 * Math.cos(2 * Math.PI / secondexplosionNumber1) * secondexplosionTime1;
+					y1 = (20 * Math.sin(2 * Math.PI / secondexplosionNumber1) * secondexplosionTime1
+							- 0.5 * 9.8 * secondexplosionTime1 * secondexplosionTime1);
+					g.drawLine((int) (x + x1), (int) (y + y1 - 30), (int) (1.73205 * 15 + x + x1), (int) (y + y1 + 15));
+					g.drawLine((int) (x + x1 + 1.73205 * 15), (int) (y + y1 + 15), (int) (x + x1 - 1.73205 * 15),
+							(int) (y + y1 + 15));
+					g.drawLine((int) (x + x1 - 1.73205 * 15), (int) (y + y1 + 15), (int) (x + x1), (int) (y + y1 - 30));
+					g.drawLine((int) (x + x1 - 1.73205 * 15), (int) (y + y1 - 15), (int) (1.73205 * 15 + x + x1),
+							(int) (y + y1 - 15));
+					g.drawLine((int) (x + x1 + 1.73205 * 15), (int) (y + y1 - 15), (int) (x + x1), (int) (y + y1 + 30));
+					g.drawLine((int) (x + x1), (int) (y + y1 + 30), (int) (x + x1 - 1.73205 * 15), (int) (y + y1 - 15));
+					x1 = 20 * Math.cos(2 * 2 * Math.PI / secondexplosionNumber1) * secondexplosionTime1;
+					y1 = (20 * Math.sin(2 * 2 * Math.PI / secondexplosionNumber1) * secondexplosionTime1
+							- 0.5 * 9.8 * secondexplosionTime1 * secondexplosionTime1);
+					g.drawLine((int) (x + x1), (int) (y + y1 - 30), (int) (1.73205 * 15 + x + x1), (int) (y + y1 + 15));
+					g.drawLine((int) (x + x1 + 1.73205 * 15), (int) (y + y1 + 15), (int) (x + x1 - 1.73205 * 15),
+							(int) (y + y1 + 15));
+					g.drawLine((int) (x + x1 - 1.73205 * 15), (int) (y + y1 + 15), (int) (x + x1), (int) (y + y1 - 30));
+					g.drawLine((int) (x + x1 - 1.73205 * 15), (int) (y + y1 - 15), (int) (1.73205 * 15 + x + x1),
+							(int) (y + y1 - 15));
+					g.drawLine((int) (x + x1 + 1.73205 * 15), (int) (y + y1 - 15), (int) (x + x1), (int) (y + y1 + 30));
+					g.drawLine((int) (x + x1), (int) (y + y1 + 30), (int) (x + x1 - 1.73205 * 15), (int) (y + y1 - 15));
+				}
+				if (secondexplosionNumber1 == 3) {
+					x1 = 20 * Math.cos(2 * Math.PI / secondexplosionNumber1) * secondexplosionTime1;
+					y1 = (20 * Math.sin(2 * Math.PI / secondexplosionNumber1) * secondexplosionTime1
+							- 0.5 * 9.8 * secondexplosionTime1 * secondexplosionTime1);
+					g.drawLine((int) (x + x1), (int) (y + y1 - 30), (int) (1.73205 * 15 + x + x1), (int) (y + y1 + 15));
+					g.drawLine((int) (x + x1 + 1.73205 * 15), (int) (y + y1 + 15), (int) (x + x1 - 1.73205 * 15),
+							(int) (y + y1 + 15));
+					g.drawLine((int) (x + x1 - 1.73205 * 15), (int) (y + y1 + 15), (int) (x + x1), (int) (y + y1 - 30));
+					g.drawLine((int) (x + x1 - 1.73205 * 15), (int) (y + y1 - 15), (int) (1.73205 * 15 + x + x1),
+							(int) (y + y1 - 15));
+					g.drawLine((int) (x + x1 + 1.73205 * 15), (int) (y + y1 - 15), (int) (x + x1), (int) (y + y1 + 30));
+					g.drawLine((int) (x + x1), (int) (y + y1 + 30), (int) (x + x1 - 1.73205 * 15), (int) (y + y1 - 15));
+					x1 = 20 * Math.cos(2 * 2 * Math.PI / secondexplosionNumber1) * secondexplosionTime1;
+					y1 = (20 * Math.sin(2 * 2 * Math.PI / secondexplosionNumber1) * secondexplosionTime1
+							- 0.5 * 9.8 * secondexplosionTime1 * secondexplosionTime1);
+					g.drawLine((int) (x + x1), (int) (y + y1 - 30), (int) (1.73205 * 15 + x + x1), (int) (y + y1 + 15));
+					g.drawLine((int) (x + x1 + 1.73205 * 15), (int) (y + y1 + 15), (int) (x + x1 - 1.73205 * 15),
+							(int) (y + y1 + 15));
+					g.drawLine((int) (x + x1 - 1.73205 * 15), (int) (y + y1 + 15), (int) (x + x1), (int) (y + y1 - 30));
+					g.drawLine((int) (x + x1 - 1.73205 * 15), (int) (y + y1 - 15), (int) (1.73205 * 15 + x + x1),
+							(int) (y + y1 - 15));
+					g.drawLine((int) (x + x1 + 1.73205 * 15), (int) (y + y1 - 15), (int) (x + x1), (int) (y + y1 + 30));
+					g.drawLine((int) (x + x1), (int) (y + y1 + 30), (int) (x + x1 - 1.73205 * 15), (int) (y + y1 - 15));
+					x1 = 20 * Math.cos(2 * 3 * Math.PI / secondexplosionNumber1) * secondexplosionTime1;
+					y1 = (20 * Math.sin(2 * 3 * Math.PI / secondexplosionNumber1) * secondexplosionTime1
+							- 0.5 * 9.8 * secondexplosionTime1 * secondexplosionTime1);
+					g.drawLine((int) (x + x1), (int) (y + y1 - 30), (int) (1.73205 * 15 + x + x1), (int) (y + y1 + 15));
+					g.drawLine((int) (x + x1 + 1.73205 * 15), (int) (y + y1 + 15), (int) (x + x1 - 1.73205 * 15),
+							(int) (y + y1 + 15));
+					g.drawLine((int) (x + x1 - 1.73205 * 15), (int) (y + y1 + 15), (int) (x + x1), (int) (y + y1 - 30));
+					g.drawLine((int) (x + x1 - 1.73205 * 15), (int) (y + y1 - 15), (int) (1.73205 * 15 + x + x1),
+							(int) (y + y1 - 15));
+					g.drawLine((int) (x + x1 + 1.73205 * 15), (int) (y + y1 - 15), (int) (x + x1), (int) (y + y1 + 30));
+					g.drawLine((int) (x + x1), (int) (y + y1 + 30), (int) (x + x1 - 1.73205 * 15), (int) (y + y1 - 15));
+				}
+
+				break;
+			case 5:
+				g.setColor(color1);
+
+				g.drawArc(0, (int) y, (int) (2 * x), (int) (4 * y), (int) (90 - angle1), 90);
+				if (secondexplosionNumber1 == 1) {
+					g.drawLine((int) x, (int) y, (int) (x), (int) (y - 80));
+					g.drawLine((int) x, (int) y, (int) (x + 60 * 1.73205), (int) (y - 30));
+					g.drawLine((int) x, (int) y, (int) (x + 60 * 1.73205), (int) (y + 30));
+					g.drawLine((int) x, (int) y, (int) x, (int) (y + 80));
+					g.drawLine((int) x, (int) y, (int) (x - 60 * 1.73205), (int) (y + 30));
+					g.drawLine((int) x, (int) y, (int) (x - 60 * 1.73205), (int) (y - 30));
+					g.drawOval((int) (x - 40), (int) (y - 40), 80, 80);
+					g.drawArc(0, (int) y, (int) (2 * x), (int) (4 * y), (int) (90 - angle1), 90);
+				}
+				if (secondexplosionNumber1 == 2) {
+
+					x1 = 20 * Math.cos(2 * Math.PI / secondexplosionNumber1) * secondexplosionTime1;
+					y1 = (20 * Math.sin(2 * Math.PI / secondexplosionNumber1) * secondexplosionTime1
+							- 0.5 * 9.8 * secondexplosionTime1 * secondexplosionTime1);
+					g.drawLine((int) (x1 + x), (int) (y1 + y), (int) (x + x1), (int) (y1 + y - 80));
+					g.drawLine((int) (x1 + x), (int) (y1 + y), (int) (x1 + x + 60 * 1.73205), (int) (y1 + y - 30));
+					g.drawLine((int) (x1 + x), (int) (y1 + y), (int) (x1 + x + 60 * 1.73205), (int) (y1 + y + 30));
+					g.drawLine((int) (x1 + x), (int) (y1 + y), (int) (x1 + x), (int) (y1 + y + 80));
+					g.drawLine((int) (x1 + x), (int) (y1 + y), (int) (x1 + x - 60 * 1.73205), (int) (y1 + y + 30));
+					g.drawLine((int) (x + x1), (int) (y1 + y), (int) (x1 + x - 60 * 1.73205), (int) (y1 + y - 30));
+					g.drawOval((int) (x1 + x - 40), (int) (y1 + y - 40), 80, 80);
+
+					x1 = 20 * Math.cos(2 * 2 * Math.PI / secondexplosionNumber1) * secondexplosionTime1;
+					y1 = (20 * Math.sin(2 * 2 * Math.PI / secondexplosionNumber1) * secondexplosionTime1
+							- 0.5 * 9.8 * secondexplosionTime1 * secondexplosionTime1);
+					g.drawLine((int) (x1 + x), (int) (y1 + y), (int) (x + x1), (int) (y1 + y - 80));
+					g.drawLine((int) (x1 + x), (int) (y1 + y), (int) (x1 + x + 60 * 1.73205), (int) (y1 + y - 30));
+					g.drawLine((int) (x1 + x), (int) (y1 + y), (int) (x1 + x + 60 * 1.73205), (int) (y1 + y + 30));
+					g.drawLine((int) (x1 + x), (int) (y1 + y), (int) (x1 + x), (int) (y1 + y + 80));
+					g.drawLine((int) (x1 + x), (int) (y1 + y), (int) (x1 + x - 60 * 1.73205), (int) (y1 + y + 30));
+					g.drawLine((int) (x + x1), (int) (y1 + y), (int) (x1 + x - 60 * 1.73205), (int) (y1 + y - 30));
+					g.drawOval((int) (x1 + x - 40), (int) (y1 + y - 40), 80, 80);
+
+				}
+				if (secondexplosionNumber1 == 3) {
+					x1 = 20 * Math.cos(2 * Math.PI / secondexplosionNumber1) * secondexplosionTime1;
+					y1 = (20 * Math.sin(2 * Math.PI / secondexplosionNumber1) * secondexplosionTime1
+							- 0.5 * 9.8 * secondexplosionTime1 * secondexplosionTime1);
+					g.drawLine((int) (x1 + x), (int) (y1 + y), (int) (x + x1), (int) (y1 + y - 80));
+					g.drawLine((int) (x1 + x), (int) (y1 + y), (int) (x1 + x + 60 * 1.73205), (int) (y1 + y - 30));
+					g.drawLine((int) (x1 + x), (int) (y1 + y), (int) (x1 + x + 60 * 1.73205), (int) (y1 + y + 30));
+					g.drawLine((int) (x1 + x), (int) (y1 + y), (int) (x1 + x), (int) (y1 + y + 80));
+					g.drawLine((int) (x1 + x), (int) (y1 + y), (int) (x1 + x - 60 * 1.73205), (int) (y1 + y + 30));
+					g.drawLine((int) (x + x1), (int) (y1 + y), (int) (x1 + x - 60 * 1.73205), (int) (y1 + y - 30));
+					g.drawOval((int) (x1 + x - 40), (int) (y1 + y - 40), 80, 80);
+
+					x1 = 20 * Math.cos(2 * 2 * Math.PI / secondexplosionNumber1) * secondexplosionTime1;
+					y1 = (20 * Math.sin(2 * 2 * Math.PI / secondexplosionNumber1) * secondexplosionTime1
+							- 0.5 * 9.8 * secondexplosionTime1 * secondexplosionTime1);
+					g.drawLine((int) (x1 + x), (int) (y1 + y), (int) (x + x1), (int) (y1 + y - 80));
+					g.drawLine((int) (x1 + x), (int) (y1 + y), (int) (x1 + x + 60 * 1.73205), (int) (y1 + y - 30));
+					g.drawLine((int) (x1 + x), (int) (y1 + y), (int) (x1 + x + 60 * 1.73205), (int) (y1 + y + 30));
+					g.drawLine((int) (x1 + x), (int) (y1 + y), (int) (x1 + x), (int) (y1 + y + 80));
+					g.drawLine((int) (x1 + x), (int) (y1 + y), (int) (x1 + x - 60 * 1.73205), (int) (y1 + y + 30));
+					g.drawLine((int) (x + x1), (int) (y1 + y), (int) (x1 + x - 60 * 1.73205), (int) (y1 + y - 30));
+					g.drawOval((int) (x1 + x - 40), (int) (y1 + y - 40), 80, 80);
+
+					x1 = 20 * Math.cos(2 * 3 * Math.PI / secondexplosionNumber1) * secondexplosionTime1;
+					y1 = (20 * Math.sin(2 * 3 * Math.PI / secondexplosionNumber1) * secondexplosionTime1
+							- 0.5 * 9.8 * secondexplosionTime1 * secondexplosionTime1);
+					g.drawLine((int) (x1 + x), (int) (y1 + y), (int) (x + x1), (int) (y1 + y - 80));
+					g.drawLine((int) (x1 + x), (int) (y1 + y), (int) (x1 + x + 60 * 1.73205), (int) (y1 + y - 30));
+					g.drawLine((int) (x1 + x), (int) (y1 + y), (int) (x1 + x + 60 * 1.73205), (int) (y1 + y + 30));
+					g.drawLine((int) (x1 + x), (int) (y1 + y), (int) (x1 + x), (int) (y1 + y + 80));
+					g.drawLine((int) (x1 + x), (int) (y1 + y), (int) (x1 + x - 60 * 1.73205), (int) (y1 + y + 30));
+					g.drawLine((int) (x + x1), (int) (y1 + y), (int) (x1 + x - 60 * 1.73205), (int) (y1 + y - 30));
+					g.drawOval((int) (x1 + x - 40), (int) (y1 + y - 40), 80, 80);
+
+				}
+
+				break;
+			}
+
+			switch (explosionNumber2) {
+			case 1:
+				g.setColor(color2);
+				g.drawArc(0, (int) yy, (int) (2 * xx), (int) (4 * yy), (int) (90 - angle2), 90);
+				if (secondexplosionNumber2 == 1) {
+					for (int i = 20, j = 20; i <= 60 && j <= 60; i += 20, j += 20) {
+						g.drawOval((int) (xx - i), (int) (yy - j), i * 2, j * 2);
+					}
+				}
+				if (secondexplosionNumber2 == 2) {
+					xx1 = 20 * Math.cos(2 * Math.PI / secondexplosionNumber2) * secondexplosionTime2;
+					yy1 = (20 * Math.sin(2 * Math.PI / secondexplosionNumber2) * secondexplosionTime2
+							- 0.5 * 9.8 * secondexplosionTime2 * secondexplosionTime2);
+					for (int i = 20, j = 20; i <= 60 && j <= 60; i += 20, j += 20) {
+						g.drawOval((int) (xx + xx1 - i), (int) (yy + yy1 - j), i * 2, j * 2);
+					}
+					xx1 = 20 * Math.cos(2 * 2 * Math.PI / secondexplosionNumber2) * secondexplosionTime2;
+					yy1 = (20 * Math.sin(2 * 2 * Math.PI / secondexplosionNumber2) * secondexplosionTime2
+							- 0.5 * 9.8 * secondexplosionTime2 * secondexplosionTime2);
+					for (int i = 20, j = 20; i <= 60 && j <= 60; i += 20, j += 20) {
+						g.drawOval((int) (xx + xx1 - i), (int) (yy + yy1 - j), i * 2, j * 2);
+					}
+				}
+				if (secondexplosionNumber2 == 3) {
+					xx1 = 20 * Math.cos(2 * Math.PI / secondexplosionNumber2) * secondexplosionTime2;
+					yy1 = (20 * Math.sin(2 * Math.PI / secondexplosionNumber2) * secondexplosionTime2
+							- 0.5 * 9.8 * secondexplosionTime2 * secondexplosionTime2);
+					for (int i = 20, j = 20; i <= 60 && j <= 60; i += 20, j += 20) {
+						g.drawOval((int) (xx + xx1 - i), (int) (yy + yy1 - j), i * 2, j * 2);
+					}
+					xx1 = 20 * Math.cos(2 * 2 * Math.PI / secondexplosionNumber2) * secondexplosionTime2;
+					yy1 = (20 * Math.sin(2 * 2 * Math.PI / secondexplosionNumber2) * secondexplosionTime2
+							- 0.5 * 9.8 * secondexplosionTime2 * secondexplosionTime2);
+					for (int i = 20, j = 20; i <= 60 && j <= 60; i += 20, j += 20) {
+						g.drawOval((int) (xx + xx1 - i), (int) (yy + yy1 - j), i * 2, j * 2);
+					}
+					xx1 = 20 * Math.cos(2 * 3 * Math.PI / secondexplosionNumber2) * secondexplosionTime2;
+					yy1 = (20 * Math.sin(2 * 3 * Math.PI / secondexplosionNumber2) * secondexplosionTime2
+							- 0.5 * 9.8 * secondexplosionTime2 * secondexplosionTime2);
+					for (int i = 20, j = 20; i <= 60 && j <= 60; i += 20, j += 20) {
+						g.drawOval((int) (xx + xx1 - i), (int) (yy + yy1 - j), i * 2, j * 2);
+					}
+				}
+
+				break;
+			case 2:
+				g.setColor(color2);
+				g.drawArc(0, (int) yy, (int) (2 * xx), (int) (4 * yy), (int) (90 - angle2), 90);
+
+				if (secondexplosionNumber2 == 1) {
+					g.drawOval((int) (xx - 20), (int) (yy - 20), 40, 40);
+					g.drawRect((int) (xx - 40), (int) (yy - 40), 80, 80);
+				}
+				if (secondexplosionNumber2 == 2) {
+					xx1 = 20 * Math.cos(2 * Math.PI / secondexplosionNumber2) * secondexplosionTime2;
+					yy1 = (20 * Math.sin(2 * Math.PI / secondexplosionNumber2) * secondexplosionTime2
+							- 0.5 * 9.8 * secondexplosionTime2 * secondexplosionTime2);
+					g.drawOval((int) (xx + xx1 - 20), (int) (yy + yy1 - 20), 40, 40);
+					g.drawRect((int) (xx + xx1 - 40), (int) (yy + yy1 - 40), 80, 80);
+					xx1 = 20 * Math.cos(2 * 2 * Math.PI / secondexplosionNumber2) * secondexplosionTime2;
+					yy1 = (20 * Math.sin(2 * 2 * Math.PI / secondexplosionNumber2) * secondexplosionTime2
+							- 0.5 * 9.8 * secondexplosionTime2 * secondexplosionTime2);
+					g.drawOval((int) (xx + xx1 - 20), (int) (yy + yy1 - 20), 40, 40);
+					g.drawRect((int) (xx + xx1 - 40), (int) (yy + yy1 - 40), 80, 80);
+				}
+				if (secondexplosionNumber2 == 3) {
+					xx1 = 20 * Math.cos(2 * Math.PI / secondexplosionNumber2) * secondexplosionTime2;
+					yy1 = (20 * Math.sin(2 * Math.PI / secondexplosionNumber2) * secondexplosionTime2
+							- 0.5 * 9.8 * secondexplosionTime2 * secondexplosionTime2);
+					g.drawOval((int) (xx + xx1 - 20), (int) (yy + yy1 - 20), 40, 40);
+					g.drawRect((int) (xx + xx1 - 40), (int) (yy + yy1 - 40), 80, 80);
+					xx1 = 20 * Math.cos(2 * 2 * Math.PI / secondexplosionNumber2) * secondexplosionTime2;
+					yy1 = (20 * Math.sin(2 * 2 * Math.PI / secondexplosionNumber2) * secondexplosionTime2
+							- 0.5 * 9.8 * secondexplosionTime2 * secondexplosionTime2);
+					g.drawOval((int) (xx + xx1 - 20), (int) (yy + yy1 - 20), 40, 40);
+					g.drawRect((int) (xx + xx1 - 40), (int) (yy + yy1 - 40), 80, 80);
+					xx1 = 20 * Math.cos(2 * 3 * Math.PI / secondexplosionNumber2) * secondexplosionTime2;
+					yy1 = (20 * Math.sin(2 * 3 * Math.PI / secondexplosionNumber2) * secondexplosionTime2
+							- 0.5 * 9.8 * secondexplosionTime2 * secondexplosionTime2);
+					g.drawOval((int) (xx + xx1 - 20), (int) (yy + yy1 - 20), 40, 40);
+					g.drawRect((int) (xx + xx1 - 40), (int) (yy + yy1 - 40), 80, 80);
+				}
+
+				break;
+		case 3:
+				g.setColor(color2);
+				g.drawArc(0, (int) yy, (int) (2 * xx), (int) (4 * yy), (int) (90 - angle2), 90);
+
+				if (secondexplosionNumber2 == 1) {
+					g.drawOval((int) (xx - 50), (int) (yy - 50), 100, 100);
+					g.drawLine((int) xx, (int) (yy - 20), (int) (xx + 1.73205 * 10), (int) (yy + 20));
+					g.drawLine((int) (xx + 1.73205 * 10), (int) (yy + 20), (int) (xx - 1.73205 * 10), (int) (yy + 20));
+					g.drawLine((int) (xx - 1.73205 * 10), (int) (yy + 20), (int) xx, (int) (yy - 20));
+				}
+				if (secondexplosionNumber2 == 2) {
+					xx1 = 20 * Math.cos(2 * Math.PI / secondexplosionNumber2) * secondexplosionTime2;
+					yy1 = (20 * Math.sin(2 * Math.PI / secondexplosionNumber2) * secondexplosionTime2
+							- 0.5 * 9.8 * secondexplosionTime2 * secondexplosionTime2);
+					g.drawOval((int) (xx + xx1 - 50), (int) (yy + yy1 - 50), 100, 100);
+					g.drawLine((int) (xx + xx1), (int) (yy +yy1- 20), (int) (xx + xx1 + 1.73205 * 10),
+							(int) (yy + yy1 + 20));
+					g.drawLine((int) (xx + xx1 + 1.73205 * 10), (int) (yy + yy1 + 20), (int) (xx + xx1 - 1.73205 * 10),
+							(int) (yy + yy1 + 20));
+					g.drawLine((int) (xx + xx1 - 1.73205 * 10), (int) (yy + yy1 + 20), (int) (xx + xx1),
+							(int) (yy + yy1 - 20));
+
+					xx1 = 20 * Math.cos(2 * 2 * Math.PI / secondexplosionNumber2) * secondexplosionTime2;
+					yy1 = (20 * Math.sin(2 * 2 * Math.PI / secondexplosionNumber2) * secondexplosionTime2- 0.5 * 9.8 * secondexplosionTime2 * secondexplosionTime2);
+					g.drawOval((int) (xx + xx1 - 50), (int) (yy + yy1 - 50), 100, 100);
+					g.drawLine((int) (xx + xx1), (int) (yy +yy1- 20), (int) (xx + xx1 + 1.73205 * 10),(int) (yy + yy1 + 20));
+					g.drawLine((int) (xx + xx1 + 1.73205 * 10), (int) (yy + yy1 + 20), (int) (xx + xx1 - 1.73205 * 10),(int) (yy + yy1 + 20));
+					g.drawLine((int) (xx + xx1 - 1.73205 * 10), (int) (yy + +yy1 + 20), (int) (xx + xx1),(int) (yy + yy1 - 20));
+				}
+				if (secondexplosionNumber2 == 3) {
+					xx1 = 20 * Math.cos(2 * Math.PI / secondexplosionNumber2) * secondexplosionTime2;
+					yy1 = (20 * Math.sin(2 * Math.PI / secondexplosionNumber2) * secondexplosionTime2
+							- 0.5 * 9.8 * secondexplosionTime2 * secondexplosionTime2);
+					g.drawOval((int) (xx + xx1 - 50), (int) (yy + yy1 - 50), 100, 100);
+					g.drawLine((int) (xx + xx1), (int) (yy +yy1- 20), (int) (xx + xx1 + 1.73205 * 10),
+							(int) (yy + yy1 + 20));
+					g.drawLine((int) (xx + xx1 + 1.73205 * 10), (int) (yy + yy1 + 20), (int) (xx + xx1 - 1.73205 * 10),
+							(int) (yy + yy1 + 20));
+					g.drawLine((int) (xx + xx1 - 1.73205 * 10), (int) (yy + +yy1 + 20), (int) (xx + xx1),
+							(int) (yy + yy1 - 20));
+
+					xx1 = 20 * Math.cos(2 * 2 * Math.PI / secondexplosionNumber2) * secondexplosionTime2;
+					yy1 = (20 * Math.sin(2 * 2 * Math.PI / secondexplosionNumber2) * secondexplosionTime2
+							- 0.5 * 9.8 * secondexplosionTime2 * secondexplosionTime2);
+					g.drawOval((int) (xx + xx1 - 50), (int) (yy + yy1 - 50), 100, 100);
+					g.drawLine((int) (xx + xx1), (int) (yy+yy1 - 20), (int) (xx + xx1 + 1.73205 * 10),
+							(int) (yy + yy1 + 20));
+					g.drawLine((int) (xx + xx1 + 1.73205 * 10), (int) (yy + yy1 + 20), (int) (xx + xx1 - 1.73205 * 10),
+							(int) (yy + yy1 + 20));
+					g.drawLine((int) (xx + xx1 - 1.73205 * 10), (int) (yy + +yy1 + 20), (int) (xx + xx1),
+							(int) (yy + yy1 - 20));
+					xx1 = 20 * Math.cos(2 * 3 * Math.PI / secondexplosionNumber2) * secondexplosionTime2;
+					yy1 = (20 * Math.sin(2 * 3 * Math.PI / secondexplosionNumber2) * secondexplosionTime2
+							- 0.5 * 9.8 * secondexplosionTime2 * secondexplosionTime2);
+					g.drawOval((int) (xx + xx1 - 50), (int) (yy + yy1 - 50), 100, 100);
+					g.drawLine((int) (xx + xx1), (int) (yy +yy1- 20), (int) (xx + xx1 + 1.73205 * 10),
+							(int) (yy + yy1 + 20));
+					g.drawLine((int) (xx + xx1 + 1.73205 * 10), (int) (yy + yy1 + 20), (int) (xx + xx1 - 1.73205 * 10),
+							(int) (yy + yy1 + 20));
+					g.drawLine((int) (xx + xx1 - 1.73205 * 10), (int) (yy + +yy1 + 20), (int) (xx + xx1),
+							(int) (yy + yy1 - 20));
+				}
+
+				break;
+
+			case 4:
+				g.setColor(color2);
+				g.drawArc(0, (int) yy, (int) (2 * xx), (int) (4 * yy), (int) (90 - angle2), 90);
+
+				if (secondexplosionNumber2 == 1) {
+					g.drawLine((int) (xx), (int) (yy - 30), (int) (1.73205 * 15 + xx), (int) (yy + 15));
+					g.drawLine((int) (xx + 1.73205 * 15), (int) (yy + 15), (int) (xx - 1.73205 * 15), (int) (yy + 15));
+					g.drawLine((int) (xx - 1.73205 * 15), (int) (yy + 15), (int) (xx), (int) (yy - 30));
+					g.drawLine((int) (xx - 1.73205 * 15), (int) (yy - 15), (int) (1.73205 * 15 + xx), (int) (yy - 15));
+					g.drawLine((int) (xx + 1.73205 * 15), (int) (yy - 15), (int) (xx), (int) (yy + 30));
+					g.drawLine((int) (xx), (int) (yy + 30), (int) (xx - 1.73205 * 15), (int) (yy - 15));
+				}
+				if (secondexplosionNumber2 == 2) {
+					xx1 = 20 * Math.cos(2 * Math.PI / secondexplosionNumber2) * secondexplosionTime2;
+					yy1 = (20 * Math.sin(2 * Math.PI / secondexplosionNumber2) * secondexplosionTime2
+							- 0.5 * 9.8 * secondexplosionTime2 * secondexplosionTime2);
+					g.drawLine((int) (xx + xx1), (int) (yy + yy1 - 30), (int) (1.73205 * 15 + xx + xx1),
+							(int) (yy + yy1 + 15));
+					g.drawLine((int) (xx + xx1 + 1.73205 * 15), (int) (yy + yy1 + 15), (int) (xx + xx1 - 1.73205 * 15),
+							(int) (yy + yy1 + 15));
+					g.drawLine((int) (xx + xx1 - 1.73205 * 15), (int) (yy + yy1 + 15), (int) (xx + xx1),
+							(int) (yy + yy1 - 30));
+					g.drawLine((int) (xx + xx1 - 1.73205 * 15), (int) (yy + yy1 - 15), (int) (1.73205 * 15 + xx + xx1),
+							(int) (yy + yy1 - 15));
+					g.drawLine((int) (xx + xx1 + 1.73205 * 15), (int) (yy + yy1 - 15), (int) (xx + xx1),
+							(int) (yy + yy1 + 30));
+					g.drawLine((int) (xx + xx1), (int) (yy + yy1 + 30), (int) (xx + xx1 - 1.73205 * 15),
+							(int) (yy + yy1 - 15));
+					xx1 = 20 * Math.cos(2 * 2 * Math.PI / secondexplosionNumber2) * secondexplosionTime2;
+					yy1 = (20 * Math.sin(2 * 2 * Math.PI / secondexplosionNumber2) * secondexplosionTime2
+							- 0.5 * 9.8 * secondexplosionTime2 * secondexplosionTime2);
+					g.drawLine((int) (xx + xx1), (int) (yy + yy1 - 30), (int) (1.73205 * 15 + xx + xx1),
+							(int) (yy + yy1 + 15));
+					g.drawLine((int) (xx + xx1 + 1.73205 * 15), (int) (yy + yy1 + 15), (int) (xx + xx1 - 1.73205 * 15),
+							(int) (yy + yy1 + 15));
+					g.drawLine((int) (xx + xx1 - 1.73205 * 15), (int) (yy + yy1 + 15), (int) (xx + xx1),
+							(int) (yy + yy1 - 30));
+					g.drawLine((int) (xx + xx1 - 1.73205 * 15), (int) (yy + yy1 - 15), (int) (1.73205 * 15 + xx + xx1),
+							(int) (yy + yy1 - 15));
+					g.drawLine((int) (xx + xx1 + 1.73205 * 15), (int) (yy + yy1 - 15), (int) (xx + xx1),
+							(int) (yy + yy1 + 30));
+					g.drawLine((int) (xx + xx1), (int) (yy + yy1 + 30), (int) (xx + xx1 - 1.73205 * 15),
+							(int) (yy + yy1 - 15));
+				}
+				if (secondexplosionNumber2 == 3) {
+					xx1 = 20 * Math.cos(2 * Math.PI / secondexplosionNumber2) * secondexplosionTime2;
+					yy1 = (20 * Math.sin(2 * Math.PI / secondexplosionNumber2) * secondexplosionTime2
+							- 0.5 * 9.8 * secondexplosionTime2 * secondexplosionTime2);
+					g.drawLine((int) (xx + xx1), (int) (yy + yy1 - 30), (int) (1.73205 * 15 + xx + xx1),
+							(int) (yy + yy1 + 15));
+					g.drawLine((int) (xx + xx1 + 1.73205 * 15), (int) (yy + yy1 + 15), (int) (xx + xx1 - 1.73205 * 15),
+							(int) (yy + yy1 + 15));
+					g.drawLine((int) (xx + xx1 - 1.73205 * 15), (int) (yy + yy1 + 15), (int) (xx + xx1),
+							(int) (yy + yy1 - 30));
+					g.drawLine((int) (xx + xx1 - 1.73205 * 15), (int) (yy + yy1 - 15), (int) (1.73205 * 15 + xx + xx1),
+							(int) (yy + yy1 - 15));
+					g.drawLine((int) (xx + xx1 + 1.73205 * 15), (int) (yy + yy1 - 15), (int) (xx + xx1),
+							(int) (yy + yy1 + 30));
+					g.drawLine((int) (xx + xx1), (int) (yy + yy1 + 30), (int) (xx + xx1 - 1.73205 * 15),
+							(int) (yy + yy1 - 15));
+					xx1 = 20 * Math.cos(2 * 2 * Math.PI / secondexplosionNumber2) * secondexplosionTime2;
+					yy1 = (20 * Math.sin(2 * 2 * Math.PI / secondexplosionNumber2) * secondexplosionTime2
+							- 0.5 * 9.8 * secondexplosionTime2 * secondexplosionTime2);
+					g.drawLine((int) (xx + xx1), (int) (yy + yy1 - 30), (int) (1.73205 * 15 + xx + xx1),
+							(int) (yy + yy1 + 15));
+					g.drawLine((int) (xx + xx1 + 1.73205 * 15), (int) (yy + yy1 + 15), (int) (xx + xx1 - 1.73205 * 15),
+							(int) (yy + yy1 + 15));
+					g.drawLine((int) (xx + xx1 - 1.73205 * 15), (int) (yy + yy1 + 15), (int) (xx + xx1),
+							(int) (yy + yy1 - 30));
+					g.drawLine((int) (xx + xx1 - 1.73205 * 15), (int) (yy + yy1 - 15), (int) (1.73205 * 15 + xx + xx1),
+							(int) (yy + yy1 - 15));
+					g.drawLine((int) (xx + xx1 + 1.73205 * 15), (int) (yy + yy1 - 15), (int) (xx + xx1),
+							(int) (yy + yy1 + 30));
+					g.drawLine((int) (xx + xx1), (int) (yy + yy1 + 30), (int) (xx + xx1 - 1.73205 * 15),
+							(int) (yy + yy1 - 15));
+					xx1 = 20 * Math.cos(2 * 3 * Math.PI / secondexplosionNumber2) * secondexplosionTime2;
+					yy1 = (20 * Math.sin(2 * 3 * Math.PI / secondexplosionNumber2) * secondexplosionTime2
+							- 0.5 * 9.8 * secondexplosionTime2 * secondexplosionTime2);
+					g.drawLine((int) (xx + xx1), (int) (yy + yy1 - 30), (int) (1.73205 * 15 + xx + xx1),
+							(int) (yy + yy1 + 15));
+					g.drawLine((int) (xx + xx1 + 1.73205 * 15), (int) (yy + yy1 + 15), (int) (xx + xx1 - 1.73205 * 15),
+							(int) (yy + yy1 + 15));
+					g.drawLine((int) (xx + xx1 - 1.73205 * 15), (int) (yy + yy1 + 15), (int) (xx + xx1),
+							(int) (yy + yy1 - 30));
+					g.drawLine((int) (xx + xx1 - 1.73205 * 15), (int) (yy + yy1 - 15), (int) (1.73205 * 15 + xx + xx1),
+							(int) (yy + yy1 - 15));
+					g.drawLine((int) (xx + xx1 + 1.73205 * 15), (int) (yy + yy1 - 15), (int) (xx + xx1),
+							(int) (yy + yy1 + 30));
+					g.drawLine((int) (xx + xx1), (int) (yy + yy1 + 30), (int) (xx + xx1 - 1.73205 * 15),
+							(int) (yy + yy1 - 15));
+				}
+
+				break;
+			case 5:
+				g.setColor(color2);
+				g.drawArc(0, (int) yy, (int) (2 * xx), (int) (4 * yy), (int) (90 - angle2), 90);
+				if (secondexplosionNumber2 == 1) {
+					g.drawLine((int) xx, (int) yy, (int) (xx), (int) (yy - 80));
+					g.drawLine((int) xx, (int) yy, (int) (xx + 60 * 1.73205), (int) (yy - 30));
+					g.drawLine((int) xx, (int) yy, (int) (xx + 60 * 1.73205), (int) (yy + 30));
+					g.drawLine((int) xx, (int) yy, (int) xx, (int) (yy + 80));
+					g.drawLine((int) xx, (int) yy, (int) (xx - 60 * 1.73205), (int) (yy + 30));
+					g.drawLine((int) xx, (int) yy, (int) (xx - 60 * 1.73205), (int) (yy - 30));
+					g.drawOval((int) (xx - 40), (int) (yy - 40), 80, 80);
+					g.drawArc(0, (int) yy, (int) (2 * xx), (int) (4 * yy), (int) (90 - angle2), 90);
+				}
+				if (secondexplosionNumber2 == 2) {
+
+					xx1 = 20 * Math.cos(2 * Math.PI / secondexplosionNumber2) * secondexplosionTime2;
+					yy1 = (20 * Math.sin(2 * Math.PI / secondexplosionNumber2) * secondexplosionTime2
+							- 0.5 * 9.8 * secondexplosionTime2 * secondexplosionTime2);
+					g.drawLine((int) (xx1 + xx), (int) (yy1 + yy), (int) (xx + xx1), (int) (yy1 + yy - 80));
+					g.drawLine((int) (xx1 + xx), (int) (yy1 + yy), (int) (xx1 + xx + 60 * 1.73205),
+							(int) (yy1 + yy - 30));
+					g.drawLine((int) (xx1 + xx), (int) (yy1 + yy), (int) (xx1 + xx + 60 * 1.73205),
+							(int) (yy1 + yy + 30));
+					g.drawLine((int) (xx1 + xx), (int) (yy1 + yy), (int) (xx1 + xx), (int) (yy1 + yy + 80));
+					g.drawLine((int) (xx1 + xx), (int) (yy1 + yy), (int) (xx1 + xx - 60 * 1.73205),
+							(int) (yy1 + yy + 30));
+					g.drawLine((int) (xx + xx1), (int) (yy1 + yy), (int) (xx1 + xx - 60 * 1.73205),
+							(int) (yy1 + yy - 30));
+					g.drawOval((int) (xx1 + xx - 40), (int) (yy1 + yy - 40), 80, 80);
+
+					xx1 = 20 * Math.cos(2 * 2 * Math.PI / secondexplosionNumber2) * secondexplosionTime2;
+					yy1 = (20 * Math.sin(2 * 2 * Math.PI / secondexplosionNumber2) * secondexplosionTime2
+							- 0.5 * 9.8 * secondexplosionTime2 * secondexplosionTime2);
+					g.drawLine((int) (xx1 + xx), (int) (yy1 + yy), (int) (xx + xx1), (int) (yy1 + yy - 80));
+					g.drawLine((int) (xx1 + xx), (int) (yy1 + yy), (int) (xx1 + xx + 60 * 1.73205),
+							(int) (yy1 + yy - 30));
+					g.drawLine((int) (xx1 + xx), (int) (yy1 + yy), (int) (xx1 + xx + 60 * 1.73205),
+							(int) (yy1 + yy + 30));
+					g.drawLine((int) (xx1 + xx), (int) (yy1 + yy), (int) (xx1 + xx), (int) (yy1 + yy + 80));
+					g.drawLine((int) (xx1 + xx), (int) (yy1 + yy), (int) (xx1 + xx - 60 * 1.73205),
+							(int) (yy1 + yy + 30));
+					g.drawLine((int) (xx + xx1), (int) (yy1 + yy), (int) (xx1 + xx - 60 * 1.73205),
+							(int) (yy1 + yy - 30));
+					g.drawOval((int) (xx1 + xx - 40), (int) (yy1 + yy - 40), 80, 80);
+
+				}
+				if (secondexplosionNumber2 == 3) {
+					xx1 = 20 * Math.cos(2 * Math.PI / secondexplosionNumber2) * secondexplosionTime2;
+					yy1 = (20 * Math.sin(2 * Math.PI / secondexplosionNumber2) * secondexplosionTime2
+							- 0.5 * 9.8 * secondexplosionTime2 * secondexplosionTime2);
+					g.drawLine((int) (xx1 + xx), (int) (yy1 + yy), (int) (xx + xx1), (int) (yy1 + yy - 80));
+					g.drawLine((int) (xx1 + xx), (int) (yy1 + yy), (int) (xx1 + xx + 60 * 1.73205),
+							(int) (yy1 + yy - 30));
+					g.drawLine((int) (xx1 + xx), (int) (yy1 + yy), (int) (xx1 + xx + 60 * 1.73205),
+							(int) (yy1 + yy + 30));
+					g.drawLine((int) (xx1 + xx), (int) (yy1 + yy), (int) (xx1 + xx), (int) (yy1 + yy + 80));
+					g.drawLine((int) (xx1 + xx), (int) (yy1 + yy), (int) (xx1 + xx - 60 * 1.73205),
+							(int) (yy1 + yy + 30));
+					g.drawLine((int) (xx + xx1), (int) (yy1 + yy), (int) (xx1 + xx - 60 * 1.73205),
+							(int) (yy1 + yy - 30));
+					g.drawOval((int) (xx1 + xx - 40), (int) (yy1 + yy - 40), 80, 80);
+
+					xx1 = 20 * Math.cos(2 * 2 * Math.PI / secondexplosionNumber2) * secondexplosionTime2;
+					yy1 = (20 * Math.sin(2 * 2 * Math.PI / secondexplosionNumber2) * secondexplosionTime2
+							- 0.5 * 9.8 * secondexplosionTime2 * secondexplosionTime2);
+					g.drawLine((int) (xx1 + xx), (int) (yy1 + yy), (int) (xx + xx1), (int) (yy1 + yy - 80));
+					g.drawLine((int) (xx1 + xx), (int) (yy1 + yy), (int) (xx1 + xx + 60 * 1.73205),
+							(int) (yy1 + yy - 30));
+					g.drawLine((int) (xx1 + xx), (int) (yy1 + yy), (int) (xx1 + xx + 60 * 1.73205),
+							(int) (yy1 + yy + 30));
+					g.drawLine((int) (xx1 + xx), (int) (yy1 + yy), (int) (xx1 + xx), (int) (yy1 + yy + 80));
+					g.drawLine((int) (xx1 + xx), (int) (yy1 + yy), (int) (xx1 + xx - 60 * 1.73205),
+							(int) (yy1 + yy + 30));
+					g.drawLine((int) (xx + xx1), (int) (yy1 + yy), (int) (xx1 + xx - 60 * 1.73205),
+							(int) (yy1 + yy - 30));
+					g.drawOval((int) (xx1 + xx - 40), (int) (yy1 + yy - 40), 80, 80);
+
+					xx1 = 20 * Math.cos(2 * 3 * Math.PI / secondexplosionNumber2) * secondexplosionTime2;
+					yy1 = (20 * Math.sin(2 * 3 * Math.PI / secondexplosionNumber2) * secondexplosionTime2
+							- 0.5 * 9.8 * secondexplosionTime2 * secondexplosionTime2);
+					g.drawLine((int) (xx1 + x), (int) (yy1 + yy), (int) (xx + xx1), (int) (yy1 + yy - 80));
+					g.drawLine((int) (xx1 + xx), (int) (yy1 + yy), (int) (xx1 + xx + 60 * 1.73205),
+							(int) (yy1 + yy - 30));
+					g.drawLine((int) (xx1 + xx), (int) (yy1 + yy), (int) (xx1 + xx + 60 * 1.73205),
+							(int) (yy1 + yy + 30));
+					g.drawLine((int) (xx1 + xx), (int) (yy1 + yy), (int) (xx1 + xx), (int) (yy1 + yy + 80));
+					g.drawLine((int) (xx1 + xx), (int) (yy1 + yy), (int) (xx1 + xx - 60 * 1.73205),
+							(int) (yy1 + yy + 30));
+					g.drawLine((int) (xx + xx1), (int) (yy1 + yy), (int) (xx1 + xx - 60 * 1.73205),
+							(int) (yy1 + yy - 30));
+					g.drawOval((int) (xx1 + xx - 40), (int) (yy1 + yy - 40), 80, 80);
+
+				}
+
+				break;
+			}
+
+		}
+
+		if (e.getSource() == newProjectile) {
+			rightPanel.setVisible(true);
+		}
+		if (e.getSource() == deleteProjectile) {
+			rightPanel.setVisible(false);
+		}
+
+	}
+
+	public static void main(String[] args) {
+		new Fireworks().setVisible(true);
+	}
+
+}
+
