@@ -1132,6 +1132,7 @@ public class Fireworks extends JFrame implements ActionListener, ItemListener, C
 		}
 		if (e.getSource() == deleteProjectile) {
 			rightPanel.setVisible(false);
+			explosionNumber2=0;
 		}
 
 	}
