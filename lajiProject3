@@ -483,27 +483,30 @@ public class Fireworks extends JFrame implements ActionListener, ItemListener, C
 			explosion4of2.setSelected(false);
 		}
 
+		//The part of drawing fireworks
 		Graphics g = centerPanel.getGraphics();
-		int b = this.getHeight();
+		int b = this.getHeight(); 
+		//x, y are the coordinates for the first explosion of the first firework
 		double x = speed1 * Math.cos(angle1) * time1;
 		double y = b - (speed1 * Math.sin(angle1) * time1 - 0.5 * 9.8 * time1 * time1);
-		double x1, y1;
-		double xx = speed2 * Math.cos(angle2) * time2;
+		double x1, y1; //The coordinates for the second explosion of the first firework
+		double xx = speed2 * Math.cos(angle2) * time2;//The coordinates of the first explosion of the second firework
 		double yy = b - (speed2 * Math.sin(angle2) * time2 - 0.5 * 9.8 * time2 * time2);
-		double xx1, yy1;
+		double xx1, yy1;// The coordinates of the second explosion of the second firework
+		
 		if (e.getSource() == start) {
 			centerPanel.paint(g);
-			switch (explosionNumber1) {
+			switch (explosionNumber1) { //To draw the first firework
 
-			case 1:
+			case 1://To draw triple circle
 				g.setColor(color1);
-				g.drawArc(0, (int) y, (int) (2 * x), (int) (4 * y), (int) (90 - angle1), 90);
-				if (secondexplosionNumber1 == 1) {
+				g.drawArc(0, (int) y, (int) (2 * x), (int) (4 * y), (int) (90 - angle1), 90);//To draw the 
+				if (secondexplosionNumber1 == 1) {//Explode only once
 					for (int i = 20, j = 20; i <= 60 && j <= 60; i += 20, j += 20) {
 						g.drawOval((int) (x - i), (int) (y - j), i * 2, j * 2);
 					}
 				}
-				if (secondexplosionNumber1 == 2) {
+				if (secondexplosionNumber1 == 2) {//Ecxplode with 2 second explosions
 					x1 = 20 * Math.cos(2 * Math.PI / secondexplosionNumber1) * secondexplosionTime1;
 					y1 = (20 * Math.sin(2 * Math.PI / secondexplosionNumber1) * secondexplosionTime1
 							- 0.5 * 9.8 * secondexplosionTime1 * secondexplosionTime1);
@@ -517,7 +520,7 @@ public class Fireworks extends JFrame implements ActionListener, ItemListener, C
 						g.drawOval((int) (x + x1 - i), (int) (y + y1 - j), i * 2, j * 2);
 					}
 				}
-				if (secondexplosionNumber1 == 3) {
+				if (secondexplosionNumber1 == 3) {//Explode with 3 second explosions
 					x1 = 20 * Math.cos(2 * Math.PI / secondexplosionNumber1) * secondexplosionTime1;
 					y1 = (20 * Math.sin(2 * Math.PI / secondexplosionNumber1) * secondexplosionTime1
 							- 0.5 * 9.8 * secondexplosionTime1 * secondexplosionTime1);
@@ -539,15 +542,15 @@ public class Fireworks extends JFrame implements ActionListener, ItemListener, C
 				}
 
 				break;
-			case 2:
+			case 2://To draw Square circle
 				g.setColor(color1);
 				g.drawArc(0, (int) y, (int) (2 * x), (int) (4 * y), (int) (90 - angle1), 90);
 
-				if (secondexplosionNumber1 == 1) {
+				if (secondexplosionNumber1 == 1) {//Explode only once 
 					g.drawOval((int) (x - 20), (int) (y - 20), 40, 40);
 					g.drawRect((int) (x - 40), (int) (y - 40), 80, 80);
 				}
-				if (secondexplosionNumber1 == 2) {
+				if (secondexplosionNumber1 == 2) {//Explode with 2 second explosions
 					x1 = 20 * Math.cos(2 * Math.PI / secondexplosionNumber1) * secondexplosionTime1;
 					y1 = (20 * Math.sin(2 * Math.PI / secondexplosionNumber1) * secondexplosionTime1
 							- 0.5 * 9.8 * secondexplosionTime1 * secondexplosionTime1);
@@ -559,7 +562,7 @@ public class Fireworks extends JFrame implements ActionListener, ItemListener, C
 					g.drawOval((int) (x + x1 - 20), (int) (y + y1 - 20), 40, 40);
 					g.drawRect((int) (x + x1 - 40), (int) (y + y1 - 40), 80, 80);
 				}
-				if (secondexplosionNumber1 == 3) {
+				if (secondexplosionNumber1 == 3) {//Explode with 3 second explosions
 					x1 = 20 * Math.cos(2 * Math.PI / secondexplosionNumber1) * secondexplosionTime1;
 					y1 = (20 * Math.sin(2 * Math.PI / secondexplosionNumber1) * secondexplosionTime1
 							- 0.5 * 9.8 * secondexplosionTime1 * secondexplosionTime1);
@@ -582,13 +585,13 @@ public class Fireworks extends JFrame implements ActionListener, ItemListener, C
 				g.setColor(color1);
 				g.drawArc(0, (int) y, (int) (2 * x), (int) (4 * y), (int) (90 - angle1), 90);
 
-				if (secondexplosionNumber1 == 1) {
+				if (secondexplosionNumber1 == 1) {//To draw Triangle circle
 					g.drawOval((int) (x - 50), (int) (y - 50), 100, 100);
 					g.drawLine((int) x, (int) (y - 20), (int) (x + 1.73205 * 10), (int) (y + 20));
 					g.drawLine((int) (x + 1.73205 * 10), (int) (y + 20), (int) (x - 1.73205 * 10), (int) (y + 20));
 					g.drawLine((int) (x - 1.73205 * 10), (int) (y + 20), (int) x, (int) (y - 20));
 				}
-				if (secondexplosionNumber1 == 2) {
+				if (secondexplosionNumber1 == 2) {//Explode with 2 second explosions
 					x1 = 20 * Math.cos(2 * Math.PI / secondexplosionNumber1) * secondexplosionTime1;
 					y1 = (20 * Math.sin(2 * Math.PI / secondexplosionNumber1) * secondexplosionTime1
 							- 0.5 * 9.8 * secondexplosionTime1 * secondexplosionTime1);
@@ -605,7 +608,7 @@ public class Fireworks extends JFrame implements ActionListener, ItemListener, C
 					g.drawLine((int) (x + x1 + 1.73205 * 10), (int) (y + y1 + 20), (int) (x + x1 - 1.73205 * 10),(int) (y + y1 + 20));
 					g.drawLine((int) (x + x1 - 1.73205 * 10), (int) (y + +y1 + 20), (int) (x + x1),(int) (y + y1 - 20));
 				}
-				if (secondexplosionNumber1 == 3) {
+				if (secondexplosionNumber1 == 3) {//Explode with 3 second explosions
 					x1 = 20 * Math.cos(2 * Math.PI / secondexplosionNumber1) * secondexplosionTime1;
 					y1 = (20 * Math.sin(2 * Math.PI / secondexplosionNumber1) * secondexplosionTime1
 							- 0.5 * 9.8 * secondexplosionTime1 * secondexplosionTime1);
@@ -635,11 +638,11 @@ public class Fireworks extends JFrame implements ActionListener, ItemListener, C
 				break;
 
 
-			case 4:
+			case 4://To draw the Hexagon
 				g.setColor(color1);
 				g.drawArc(0, (int) y, (int) (2 * x), (int) (4 * y), (int) (90 - angle1), 90);
 
-				if (secondexplosionNumber1 == 1) {
+				if (secondexplosionNumber1 == 1) {//Explode only once 
 					g.drawLine((int) (x), (int) (y - 30), (int) (1.73205 * 15 + x), (int) (y + 15));
 					g.drawLine((int) (x + 1.73205 * 15), (int) (y + 15), (int) (x - 1.73205 * 15), (int) (y + 15));
 					g.drawLine((int) (x - 1.73205 * 15), (int) (y + 15), (int) (x), (int) (y - 30));
@@ -647,7 +650,7 @@ public class Fireworks extends JFrame implements ActionListener, ItemListener, C
 					g.drawLine((int) (x + 1.73205 * 15), (int) (y - 15), (int) (x), (int) (y + 30));
 					g.drawLine((int) (x), (int) (y + 30), (int) (x - 1.73205 * 15), (int) (y - 15));
 				}
-				if (secondexplosionNumber1 == 2) {
+				if (secondexplosionNumber1 == 2) {//Explode with 2 second explosions
 					x1 = 20 * Math.cos(2 * Math.PI / secondexplosionNumber1) * secondexplosionTime1;
 					y1 = (20 * Math.sin(2 * Math.PI / secondexplosionNumber1) * secondexplosionTime1
 							- 0.5 * 9.8 * secondexplosionTime1 * secondexplosionTime1);
@@ -671,7 +674,7 @@ public class Fireworks extends JFrame implements ActionListener, ItemListener, C
 					g.drawLine((int) (x + x1 + 1.73205 * 15), (int) (y + y1 - 15), (int) (x + x1), (int) (y + y1 + 30));
 					g.drawLine((int) (x + x1), (int) (y + y1 + 30), (int) (x + x1 - 1.73205 * 15), (int) (y + y1 - 15));
 				}
-				if (secondexplosionNumber1 == 3) {
+				if (secondexplosionNumber1 == 3) {//Explode with 3 second explosions
 					x1 = 20 * Math.cos(2 * Math.PI / secondexplosionNumber1) * secondexplosionTime1;
 					y1 = (20 * Math.sin(2 * Math.PI / secondexplosionNumber1) * secondexplosionTime1
 							- 0.5 * 9.8 * secondexplosionTime1 * secondexplosionTime1);
@@ -708,11 +711,11 @@ public class Fireworks extends JFrame implements ActionListener, ItemListener, C
 				}
 
 				break;
-			case 5:
+			case 5://To draw a sun
 				g.setColor(color1);
 
 				g.drawArc(0, (int) y, (int) (2 * x), (int) (4 * y), (int) (90 - angle1), 90);
-				if (secondexplosionNumber1 == 1) {
+				if (secondexplosionNumber1 == 1) {//Explodes only once
 					g.drawLine((int) x, (int) y, (int) (x), (int) (y - 80));
 					g.drawLine((int) x, (int) y, (int) (x + 60 * 1.73205), (int) (y - 30));
 					g.drawLine((int) x, (int) y, (int) (x + 60 * 1.73205), (int) (y + 30));
@@ -722,7 +725,7 @@ public class Fireworks extends JFrame implements ActionListener, ItemListener, C
 					g.drawOval((int) (x - 40), (int) (y - 40), 80, 80);
 					g.drawArc(0, (int) y, (int) (2 * x), (int) (4 * y), (int) (90 - angle1), 90);
 				}
-				if (secondexplosionNumber1 == 2) {
+				if (secondexplosionNumber1 == 2) {//Explode with 2 second explosions
 
 					x1 = 20 * Math.cos(2 * Math.PI / secondexplosionNumber1) * secondexplosionTime1;
 					y1 = (20 * Math.sin(2 * Math.PI / secondexplosionNumber1) * secondexplosionTime1
@@ -747,7 +750,7 @@ public class Fireworks extends JFrame implements ActionListener, ItemListener, C
 					g.drawOval((int) (x1 + x - 40), (int) (y1 + y - 40), 80, 80);
 
 				}
-				if (secondexplosionNumber1 == 3) {
+				if (secondexplosionNumber1 == 3) {//Explode with 3 second explosions
 					x1 = 20 * Math.cos(2 * Math.PI / secondexplosionNumber1) * secondexplosionTime1;
 					y1 = (20 * Math.sin(2 * Math.PI / secondexplosionNumber1) * secondexplosionTime1
 							- 0.5 * 9.8 * secondexplosionTime1 * secondexplosionTime1);
@@ -786,16 +789,16 @@ public class Fireworks extends JFrame implements ActionListener, ItemListener, C
 				break;
 			}
 
-			switch (explosionNumber2) {
-			case 1:
+			switch (explosionNumber2) {//To draw the second firework
+			case 1://To draw Triple circle
 				g.setColor(color2);
 				g.drawArc(0, (int) yy, (int) (2 * xx), (int) (4 * yy), (int) (90 - angle2), 90);
-				if (secondexplosionNumber2 == 1) {
+				if (secondexplosionNumber2 == 1) {//Only explode once
 					for (int i = 20, j = 20; i <= 60 && j <= 60; i += 20, j += 20) {
 						g.drawOval((int) (xx - i), (int) (yy - j), i * 2, j * 2);
 					}
 				}
-				if (secondexplosionNumber2 == 2) {
+				if (secondexplosionNumber2 == 2) {//Explode with 2 second explosions
 					xx1 = 20 * Math.cos(2 * Math.PI / secondexplosionNumber2) * secondexplosionTime2;
 					yy1 = (20 * Math.sin(2 * Math.PI / secondexplosionNumber2) * secondexplosionTime2
 							- 0.5 * 9.8 * secondexplosionTime2 * secondexplosionTime2);
@@ -809,7 +812,7 @@ public class Fireworks extends JFrame implements ActionListener, ItemListener, C
 						g.drawOval((int) (xx + xx1 - i), (int) (yy + yy1 - j), i * 2, j * 2);
 					}
 				}
-				if (secondexplosionNumber2 == 3) {
+				if (secondexplosionNumber2 == 3) {//Explode with 3 second explosions
 					xx1 = 20 * Math.cos(2 * Math.PI / secondexplosionNumber2) * secondexplosionTime2;
 					yy1 = (20 * Math.sin(2 * Math.PI / secondexplosionNumber2) * secondexplosionTime2
 							- 0.5 * 9.8 * secondexplosionTime2 * secondexplosionTime2);
@@ -831,15 +834,15 @@ public class Fireworks extends JFrame implements ActionListener, ItemListener, C
 				}
 
 				break;
-			case 2:
+			case 2://To draw Square circle
 				g.setColor(color2);
 				g.drawArc(0, (int) yy, (int) (2 * xx), (int) (4 * yy), (int) (90 - angle2), 90);
 
-				if (secondexplosionNumber2 == 1) {
+				if (secondexplosionNumber2 == 1) {//Explode only once
 					g.drawOval((int) (xx - 20), (int) (yy - 20), 40, 40);
 					g.drawRect((int) (xx - 40), (int) (yy - 40), 80, 80);
 				}
-				if (secondexplosionNumber2 == 2) {
+				if (secondexplosionNumber2 == 2) {//Explode with 2 second explosions
 					xx1 = 20 * Math.cos(2 * Math.PI / secondexplosionNumber2) * secondexplosionTime2;
 					yy1 = (20 * Math.sin(2 * Math.PI / secondexplosionNumber2) * secondexplosionTime2
 							- 0.5 * 9.8 * secondexplosionTime2 * secondexplosionTime2);
@@ -851,7 +854,7 @@ public class Fireworks extends JFrame implements ActionListener, ItemListener, C
 					g.drawOval((int) (xx + xx1 - 20), (int) (yy + yy1 - 20), 40, 40);
 					g.drawRect((int) (xx + xx1 - 40), (int) (yy + yy1 - 40), 80, 80);
 				}
-				if (secondexplosionNumber2 == 3) {
+				if (secondexplosionNumber2 == 3) {//Explode with 3 second explosions
 					xx1 = 20 * Math.cos(2 * Math.PI / secondexplosionNumber2) * secondexplosionTime2;
 					yy1 = (20 * Math.sin(2 * Math.PI / secondexplosionNumber2) * secondexplosionTime2
 							- 0.5 * 9.8 * secondexplosionTime2 * secondexplosionTime2);
@@ -870,17 +873,17 @@ public class Fireworks extends JFrame implements ActionListener, ItemListener, C
 				}
 
 				break;
-		case 3:
+		case 3://To draw the Triangle circle
 				g.setColor(color2);
 				g.drawArc(0, (int) yy, (int) (2 * xx), (int) (4 * yy), (int) (90 - angle2), 90);
 
-				if (secondexplosionNumber2 == 1) {
+				if (secondexplosionNumber2 == 1) {//Explode only once
 					g.drawOval((int) (xx - 50), (int) (yy - 50), 100, 100);
 					g.drawLine((int) xx, (int) (yy - 20), (int) (xx + 1.73205 * 10), (int) (yy + 20));
 					g.drawLine((int) (xx + 1.73205 * 10), (int) (yy + 20), (int) (xx - 1.73205 * 10), (int) (yy + 20));
 					g.drawLine((int) (xx - 1.73205 * 10), (int) (yy + 20), (int) xx, (int) (yy - 20));
 				}
-				if (secondexplosionNumber2 == 2) {
+				if (secondexplosionNumber2 == 2) {//Explode with 2 second explosions
 					xx1 = 20 * Math.cos(2 * Math.PI / secondexplosionNumber2) * secondexplosionTime2;
 					yy1 = (20 * Math.sin(2 * Math.PI / secondexplosionNumber2) * secondexplosionTime2
 							- 0.5 * 9.8 * secondexplosionTime2 * secondexplosionTime2);
@@ -899,7 +902,7 @@ public class Fireworks extends JFrame implements ActionListener, ItemListener, C
 					g.drawLine((int) (xx + xx1 + 1.73205 * 10), (int) (yy + yy1 + 20), (int) (xx + xx1 - 1.73205 * 10),(int) (yy + yy1 + 20));
 					g.drawLine((int) (xx + xx1 - 1.73205 * 10), (int) (yy + +yy1 + 20), (int) (xx + xx1),(int) (yy + yy1 - 20));
 				}
-				if (secondexplosionNumber2 == 3) {
+				if (secondexplosionNumber2 == 3) {//Explode with 3 second explosions
 					xx1 = 20 * Math.cos(2 * Math.PI / secondexplosionNumber2) * secondexplosionTime2;
 					yy1 = (20 * Math.sin(2 * Math.PI / secondexplosionNumber2) * secondexplosionTime2
 							- 0.5 * 9.8 * secondexplosionTime2 * secondexplosionTime2);
@@ -935,11 +938,11 @@ public class Fireworks extends JFrame implements ActionListener, ItemListener, C
 
 				break;
 
-			case 4:
+			case 4://To draw Hexagon
 				g.setColor(color2);
 				g.drawArc(0, (int) yy, (int) (2 * xx), (int) (4 * yy), (int) (90 - angle2), 90);
 
-				if (secondexplosionNumber2 == 1) {
+				if (secondexplosionNumber2 == 1) {//Explode only once
 					g.drawLine((int) (xx), (int) (yy - 30), (int) (1.73205 * 15 + xx), (int) (yy + 15));
 					g.drawLine((int) (xx + 1.73205 * 15), (int) (yy + 15), (int) (xx - 1.73205 * 15), (int) (yy + 15));
 					g.drawLine((int) (xx - 1.73205 * 15), (int) (yy + 15), (int) (xx), (int) (yy - 30));
@@ -947,7 +950,7 @@ public class Fireworks extends JFrame implements ActionListener, ItemListener, C
 					g.drawLine((int) (xx + 1.73205 * 15), (int) (yy - 15), (int) (xx), (int) (yy + 30));
 					g.drawLine((int) (xx), (int) (yy + 30), (int) (xx - 1.73205 * 15), (int) (yy - 15));
 				}
-				if (secondexplosionNumber2 == 2) {
+				if (secondexplosionNumber2 == 2) {//Explode with 2 second explosions
 					xx1 = 20 * Math.cos(2 * Math.PI / secondexplosionNumber2) * secondexplosionTime2;
 					yy1 = (20 * Math.sin(2 * Math.PI / secondexplosionNumber2) * secondexplosionTime2
 							- 0.5 * 9.8 * secondexplosionTime2 * secondexplosionTime2);
@@ -979,7 +982,7 @@ public class Fireworks extends JFrame implements ActionListener, ItemListener, C
 					g.drawLine((int) (xx + xx1), (int) (yy + yy1 + 30), (int) (xx + xx1 - 1.73205 * 15),
 							(int) (yy + yy1 - 15));
 				}
-				if (secondexplosionNumber2 == 3) {
+				if (secondexplosionNumber2 == 3) {//Explode with 3 second explosions
 					xx1 = 20 * Math.cos(2 * Math.PI / secondexplosionNumber2) * secondexplosionTime2;
 					yy1 = (20 * Math.sin(2 * Math.PI / secondexplosionNumber2) * secondexplosionTime2
 							- 0.5 * 9.8 * secondexplosionTime2 * secondexplosionTime2);
@@ -1028,10 +1031,10 @@ public class Fireworks extends JFrame implements ActionListener, ItemListener, C
 				}
 
 				break;
-			case 5:
+			case 5://To draw the sun
 				g.setColor(color2);
 				g.drawArc(0, (int) yy, (int) (2 * xx), (int) (4 * yy), (int) (90 - angle2), 90);
-				if (secondexplosionNumber2 == 1) {
+				if (secondexplosionNumber2 == 1) {//Explode only once
 					g.drawLine((int) xx, (int) yy, (int) (xx), (int) (yy - 80));
 					g.drawLine((int) xx, (int) yy, (int) (xx + 60 * 1.73205), (int) (yy - 30));
 					g.drawLine((int) xx, (int) yy, (int) (xx + 60 * 1.73205), (int) (yy + 30));
@@ -1041,8 +1044,7 @@ public class Fireworks extends JFrame implements ActionListener, ItemListener, C
 					g.drawOval((int) (xx - 40), (int) (yy - 40), 80, 80);
 					g.drawArc(0, (int) yy, (int) (2 * xx), (int) (4 * yy), (int) (90 - angle2), 90);
 				}
-				if (secondexplosionNumber2 == 2) {
-
+				if (secondexplosionNumber2 == 2) {//Explode with 2 second explosions
 					xx1 = 20 * Math.cos(2 * Math.PI / secondexplosionNumber2) * secondexplosionTime2;
 					yy1 = (20 * Math.sin(2 * Math.PI / secondexplosionNumber2) * secondexplosionTime2
 							- 0.5 * 9.8 * secondexplosionTime2 * secondexplosionTime2);
@@ -1074,7 +1076,7 @@ public class Fireworks extends JFrame implements ActionListener, ItemListener, C
 					g.drawOval((int) (xx1 + xx - 40), (int) (yy1 + yy - 40), 80, 80);
 
 				}
-				if (secondexplosionNumber2 == 3) {
+				if (secondexplosionNumber2 == 3) {//Explode with 3 second explosions
 					xx1 = 20 * Math.cos(2 * Math.PI / secondexplosionNumber2) * secondexplosionTime2;
 					yy1 = (20 * Math.sin(2 * Math.PI / secondexplosionNumber2) * secondexplosionTime2
 							- 0.5 * 9.8 * secondexplosionTime2 * secondexplosionTime2);
