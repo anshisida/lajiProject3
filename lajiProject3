@@ -581,11 +581,11 @@ public class Fireworks extends JFrame implements ActionListener, ItemListener, C
 				}
 
 				break;
-			case 3:
+			case 3://To draw Triangle circle
 				g.setColor(color1);
 				g.drawArc(0, (int) y, (int) (2 * x), (int) (4 * y), (int) (90 - angle1), 90);
 
-				if (secondexplosionNumber1 == 1) {//To draw Triangle circle
+				if (secondexplosionNumber1 == 1) {//Explode only once
 					g.drawOval((int) (x - 50), (int) (y - 50), 100, 100);
 					g.drawLine((int) x, (int) (y - 20), (int) (x + 1.73205 * 10), (int) (y + 20));
 					g.drawLine((int) (x + 1.73205 * 10), (int) (y + 20), (int) (x - 1.73205 * 10), (int) (y + 20));
